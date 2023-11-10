@@ -1,0 +1,106 @@
+.image-container {
+  position: relative;
+  width: 100%; /* or you can set a specific width if needed */
+}
+
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+  display: block; /* To remove bottom spacing */
+}
+
+.centered-button {
+  position: absolute;
+  top: 30%; /* This will place the button's top edge at 2/3 the height of the container */
+  left: 50%; /* This will center the button, but we need to adjust for its own width next */
+  transform: translate(-50%, -50%); /* This adjusts for the button's width, to truly center it */
+}
+
+.text-below-banner {
+  font-size: 16px;  /* adjust text size */
+  color: #333;     /* text color */
+  padding: 20px;   /* spacing inside the box */
+  background: #f9f9f9; /* background color of the text area */
+  margin-top: 20px; /* spacing between the image and the text */
+  text-align: center; /* centers the text */
+}
+.button-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.custom-button {
+  background-color: #008000;
+  color: black;
+  padding: 20px 30px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.custom-button:hover {
+  background-color: #006600;
+}
+
+.slogan {
+  display: block;
+  text-decoration: underline;
+  margin-top: 10px; /* Adjust if needed for spacing inside the button */
+}
+
+
+.product-header {
+  font-size: 24px;   /* Adjust size as needed */
+  text-align: center;
+  margin-top: 40px;  /* Adjust spacing as needed */
+  margin-bottom: 20px; /* Adjust spacing as needed */
+  font-weight: bold;
+  color: #333;   /* Adjust color as needed */
+}
+
+.image-row {
+  display: flex;
+  justify-content: space-around;  /* This will distribute the images evenly */
+  align-items: center;
+  padding: 20px 0;
+}
+
+.custom-image {
+  width: calc(33.33% - 20px); 
+  max-width: 100%;
+  height: auto;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-around;  /* Distributes the buttons evenly */
+  align-items: center;
+  padding: 20px 0;
+}
+
+.custom-button {
+  background-color: #008000;
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #006400;  /* Darkens the button on hover */
+}
+
+
+
+

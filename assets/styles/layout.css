@@ -1,0 +1,26 @@
+.fixed-logo {
+  height: 30%;
+  min-height: 20%;
+  width: 30%;
+  min-width: 20%;
+  cursor: pointer;
+  display: block; /* Makes the image a block-level element to react to width and height properly */
+  margin: 0 auto; /* Center the image if needed */
+}
+
+@media (max-width: 768px) {
+  .hide-on-small {
+    display: none;
+  }
+  .fixed-logo {
+    height: 60%;
+    width: 55%; /* adjust as needed */
+    margin-left: 0;
+  }
+  .icons-margin{
+    margin: 3px;
+  }
+  .burger-size{
+    font-size: larger;
+  }
+}
