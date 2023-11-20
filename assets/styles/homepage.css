@@ -145,6 +145,16 @@
   justify-content: space-evenly;
 }
 
+.toggle-link {
+  text-decoration: underline;
+  cursor: pointer; /* Ändert den Cursor, um anzuzeigen, dass es klickbar ist */
+}
+
+/* Änderungen bei Hover */
+.toggle-link:hover {
+  color: blue;
+}
+
 
 @media (max-width: 600px) {
   .button-grid {
