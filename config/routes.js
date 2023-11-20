@@ -20,7 +20,10 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
-  '/produkte': {view: 'pages/produkte'}
+  '/products': {view: 'pages/products'},
+  '/addProducts' : {view: 'pages/addProducts'},
+
+  'GET /products' : {controller: 'ProductController', action: 'create' }
 
 
   /***************************************************************************

@@ -9,8 +9,10 @@ module.exports = {
   // Create a new product
   create: async function (req, res) {
     try {
-      const newProduct = await Product.create(req.body).fetch();
-      return res.status(201).json(newProduct);
+      console.log("create Product")
+      let params = req.allParams()
+      await Product.create(params)
+      res.view('pages/')
     } catch (err) {
       return res.serverError(err);
     }

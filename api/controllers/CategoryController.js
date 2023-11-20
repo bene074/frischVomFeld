@@ -5,53 +5,26 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const Sails = require("sails/lib/app/Sails");
+
 module.exports = {
-  // Create a new category
   create: async function (req, res) {
-    try {
-      const newCategory = await Category.create(req.body).fetch();
-      return res.status(201).json(newCategory);
-    } catch (err) {
-      return res.serverError(err);
-    }
+    sails.log.debug("Create new category....")
+    let category = await Category.create(req.allParams());
+    res.redirect('/category');
   },
 
-  // Read category information
-  read: async function (req, res) {
-    try {
-      const categories = await Category.find();
-      return res.status(200).json(categories);
-    } catch (err) {
-      return res.serverError(err);
-    }
+  find: async function (req, res) {
+    sails.log.debug("List category....")
+    categories = await Category.find();
+    res.view('pages/category/index', { categories });
   },
 
-  // Update a category's information
-  update: async function (req, res) {
-    try {
-      const updatedCategory = await Category.updateOne({ categoryID: req.params.id })
-        .set(req.body);
-      if (updatedCategory) {
-        return res.status(200).json(updatedCategory);
-      } else {
-        return res.notFound();
-      }
-    } catch (err) {
-      return res.serverError(err);
-    }
+  destroyOne: async function (req, res) {
+    sails.log.debug("Destroy category....")
+    await Category.destroyOne({ id: req.params.id });
+    res.redirect('/category');
   },
 
-  // Delete a category
-  delete: async function (req, res) {
-    try {
-      const deletedCategory = await Category.destroyOne({ categoryID: req.params.id });
-      if (deletedCategory) {
-        return res.status(200).json(deletedCategory);
-      } else {
-        return res.notFound();
-      }
-    } catch (err) {
-      return res.serverError(err);
-    }
-  }
+
 };

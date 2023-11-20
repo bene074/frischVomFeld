@@ -7,11 +7,6 @@
 
 module.exports = {
   attributes: {
-    userID: {
-      type: 'number',
-      autoIncrement: true,
-      columnName: 'userID'
-    },
     firstName: {
       type: 'string',
       maxLength: 50
@@ -31,14 +26,13 @@ module.exports = {
     },
     products: {
       collection: 'Product',
-      via: 'sellerID'
+      via: 'id'
     },
     reviews: {
       collection: 'Review',
-      via: 'userID'
+      via: 'id'
     }
   },
-  primaryKey: 'userID',
   tableName: 'User'
 };
 

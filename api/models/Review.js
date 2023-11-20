@@ -7,11 +7,6 @@
 
 module.exports = {
   attributes: {
-    reviewID: {
-      type: 'number',
-      autoIncrement: true,
-      columnName: 'reviewID'
-    },
     date: {
       type: 'ref',
       columnType: 'date'
@@ -21,17 +16,13 @@ module.exports = {
     },
     productID: {
       model: 'Product',
-      columnName: 'productID'
+      columnName: 'id'
     },
     userID: {
       model: 'User',
-      columnName: 'userID'
+      columnName: 'id'
     },
-    comment: {
-      type: 'string',
-      columnType: 'text'
-    }
+
   },
-  primaryKey: 'reviewID',
   tableName: 'Review'
 };

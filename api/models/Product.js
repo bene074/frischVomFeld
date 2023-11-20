@@ -7,11 +7,6 @@
 
 module.exports = {
   attributes: {
-    productID: {
-      type: 'number',
-      autoIncrement: true,
-      columnName: 'productID'
-    },
     availability: {
       type: 'boolean'
     },
@@ -21,7 +16,7 @@ module.exports = {
     },
     sellerID: {
       model: 'User',
-      columnName: 'sellerID'
+      columnName: 'id'
     },
     name: {
       type: 'string',
@@ -40,6 +35,5 @@ module.exports = {
       via: 'productID'
     }
   },
-  primaryKey: 'productID',
   tableName: 'Product'
 };
