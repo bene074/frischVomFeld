@@ -9,7 +9,7 @@ module.exports = {
       type: 'string',
       columnType: 'text'
     },
-    meals :{
+    products :{
       collection : 'product',
       via : 'category'
     }
