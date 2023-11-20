@@ -14,10 +14,6 @@ module.exports = {
       type: 'string',
       maxLength: 255
     },
-    sellerID: {
-      model: 'User',
-      columnName: 'id'
-    },
     name: {
       type: 'string',
       maxLength: 100
@@ -30,9 +26,8 @@ module.exports = {
       type: 'number',
       columnType: 'decimal(10,2)'
     },
-    reviews: {
-      collection: 'Review',
-      via: 'productID'
+    category: {
+      model : 'category'
     }
   },
   tableName: 'Product'

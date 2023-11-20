@@ -4,7 +4,7 @@
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
  */
-
+/*
 module.exports = {
   attributes: {
     date: {
@@ -16,7 +16,6 @@ module.exports = {
     },
     productID: {
       model: 'Product',
-      columnName: 'id'
     },
     userID: {
       model: 'User',
@@ -25,4 +24,4 @@ module.exports = {
 
   },
   tableName: 'Review'
-};
+};*/

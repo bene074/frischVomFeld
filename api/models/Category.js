@@ -8,6 +8,10 @@ module.exports = {
     description: {
       type: 'string',
       columnType: 'text'
+    },
+    meals :{
+      collection : 'product',
+      via : 'category'
     }
   },
   tableName: 'Category'
