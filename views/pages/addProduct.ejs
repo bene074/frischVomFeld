@@ -1,18 +1,38 @@
-<div class="container">
-    <form action="/products" method="post">
+<div class="container" id="addProduct">
+    <form action="/product" method="post">
+        <!-- Name -->
+        <div class="form-group">
+            <label class="col-form-label-lg">Name</label>
+            <input type="text" class="form-control" maxlength="100" name="name">
+        </div>
+
+        <!-- Price -->
         <div>
             <div class="form-group">
-                <label class="col-form-label-lg">Name</label>
-                <input type="text" class="form-control" maxlength="80" name="name">
-            </div>
-            <div class="form-group">
                 <label class="col-form-label-lg">Preis</label>
-                <input type="text" class="form-control" maxlength="8" name="price">
+                <input type="number" class="form-control" step="0.01" min="0" max="99999999.99" name="price">
             </div>
+
             <div class="form-group">
-                <label class="col-form-label-lg">Beschreibung</label>
-                <input type="text" maxlength="255" class="form-control" size="40" name="description">
+                <label class="col-form-label-lg">Preisart</label>
+                <select class="form-control" name="priceType">
+                    <option value="unit">Pro Einheit</option>
+                    <option value="weight">Pro Gewicht</option>
+                </select>
             </div>
+        </div>
+
+
+        <!-- Description -->
+        <div class="form-group">
+            <label class="col-form-label-lg">Beschreibung</label>
+            <textarea class="form-control" maxlength="255" name="description" rows="4"></textarea>
+        </div>
+
+        <!-- Availability Checkbox -->
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="availability" name="availability">
+            <label class="form-check-label" for="availability">Verfügbar</label>
         </div>
         <div class="form-group">
             <label class="col-form-label-lg">Kategorie</label>
@@ -22,6 +42,6 @@
                 <% }); %>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary mt-4">Hinzufügen</button>
+        <button type="submit" class="btn btn-primary mt-4 add-button">Hinzufügen</button>
     </form>
 </div>

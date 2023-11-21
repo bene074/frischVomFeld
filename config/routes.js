@@ -20,14 +20,16 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
-  '/products': {view: 'pages/products'},
 
 
   'GET /addProduct' : {controller: 'ProductController', action: 'new'},
-  'POST /products': { controller: 'ProductController', action:'create' },
+  'POST /product': { controller: 'ProductController', action:'create' },
+  'GET /product': 'ProductController.find',
 
   'GET /category': { controller: 'CategoryController', action: 'find' },
-
+  'GET /category/add': { view: 'pages/category/add' },
+  'POST /category': { controller: 'CategoryController', action:'create' },
+  'GET /category/:id/destroy': { controller: 'CategoryController', action: 'destroyOne' },
 
 
   /***************************************************************************

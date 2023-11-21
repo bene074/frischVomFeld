@@ -1,0 +1,32 @@
+<div class="container">
+
+
+    <div class="item-content">
+        <table class="table">
+            <thead>
+            <th>Name</th>
+            <th>Preis</th>
+            </thead>
+            <tbody>
+            <% products.forEach(function(product){ %>
+                <tr>
+                    <td>
+                        <%= product.name %>
+                    </td>
+                    <td>
+                        <%= product.price %>
+                    </td>
+                    <td>
+                        <%= product.category.name %>
+                    </td>
+                    <td> <a class="green-button" href="/product/<%= product.id %>">anzeigen</a></td>
+                    <td> <a class="green-button" href="/product/<%= product.id %>/edit">ändern</a></td>
+                    <td> <a class="green-button" href="/product/<%= product.id %>/destroy">löschen</a></td>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
+        <a class="green-button" href="/addProduct">Hinzufügen</a>
+    </div>
+</div>
+</div>

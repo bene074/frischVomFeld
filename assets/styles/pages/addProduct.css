@@ -3,6 +3,10 @@
   justify-content: center;
 }
 
+.add-button{
+  margin-bottom: 20px;
+}
+
 .product-form-container form {
   background: #fff;
   padding: 20px;

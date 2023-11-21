@@ -18,20 +18,23 @@ module.exports = {
     sails.log.debug("Create product....")
     let params = req.allParams();
     await Product.create(params);
-    res.redirect ('/products' );
+    let products = await Product.find();
+    res.view ('pages/product/index', { products: products } );
   },
 
   find: async function (req, res) {
     sails.log.debug("List all products....")
     let products;
     if (req.query.q && req.query.q.length > 0) {
-      products = await product.find({
+      products = await Product.find({
         name: {
           'contains': req.query.q
         }
       })
     } else {
-      products = await product.find().populate("category");
+      sails.log.debug("Produkte"+await Product.find().populate("category"))
+
+      products = await Product.find().populate("category");
     }
     res.view ('pages/product/index', { products: products } );
   },

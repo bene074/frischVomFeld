@@ -26,6 +26,10 @@ module.exports = {
       type: 'number',
       columnType: 'decimal(10,2)'
     },
+    priceType: {
+      type: 'string',
+      isIn: ['unit', 'weight'],
+    },
     category: {
       model : 'category'
     }
