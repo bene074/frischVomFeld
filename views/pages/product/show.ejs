@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="card w-100 mt-4">
+        <h4 class="card-header">
+            Produkt Details
+        </h4>
+        <div>
+            <!-- Name -->
+            <div class="row">
+                <div class="col-2">
+                    Name
+                </div>
+                <div class="col-10">
+                    <%= product.name %>
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="row">
+                <div class="col-2">
+                    Preis
+                </div>
+                <div class="col-10">
+                    <%= product.price %> <%= product.priceType === 'weight' ? '€ pro Gewicht' : '€ pro Stück' %>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="row">
+                <div class="col-2">
+                    Beschreibung
+                </div>
+                <div class="col-10">
+                    <%= product.description %>
+                </div>
+            </div>
+
+            <!-- Category -->
+            <% if(product.category) { %>
+                <div class="row">
+                    <div class="col-2">
+                        Kategorie
+                    </div>
+                    <div class="col-10">
+                        <%= product.category.name %>
+                    </div>
+                </div>
+            <% } %>
+
+            <!-- Availability -->
+            <div class="row">
+                <div class="col-2">
+                    Verfügbarkeit
+                </div>
+                <div class="col-10">
+                    <%= product.availability ? 'Verfügbar' : 'Nicht verfügbar' %>
+                </div>
+            </div>
+
+            <!-- Image -->
+            <div class="row">
+                <div class="col-2">
+                    Bild
+                </div>
+                <div class="col-10">
+                    <% if (product.image) { %>
+                        <img src="<%= product.image %>" alt="Produktbild" style="max-width: 100px; max-height: 100px;">
+                    <% } else { %>
+                        Kein Bild verfügbar
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

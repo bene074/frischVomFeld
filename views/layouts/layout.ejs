@@ -60,14 +60,14 @@
           </a>
 
       </div>
-      <img class="fixed-logo"  alt="frischVomFeld logo" src="images/FvFLogo-removebg.png" onclick="window.location.href='/'"/>
+      <img class="fixed-logo"  alt="frischVomFeld logo" src="../images/FvFLogo-removebg.png" onclick="window.location.href='/'"/>
 
 
       <div class="navbar-nav flex-row">
 
           <div class="d-flex justify-content-end">
-              <form action="/product"  class="form-inline mr-2">
-                  <input class="form-control d-none d-md-block" type="search" placeholder="Suchen" aria-label="Search">
+              <form action="/product" method="get"  class="form-inline mr-2">
+                  <input class="form-control d-none d-md-block" type="search" placeholder="Suchen" aria-label="Search" name="q">
               </form>
               <button class="btn btn-outline-light mr-2">
                   <i class="fas fa-user "></i>
@@ -202,7 +202,10 @@
     <script src="/js/pages/category/add.page.js"></script>
     <script src="/js/pages/category/index.page.js"></script>
     <script src="/js/pages/homepage.page.js"></script>
+    <script src="/js/pages/layout.js"></script>
+    <script src="/js/pages/product/edit.page.js"></script>
     <script src="/js/pages/product/index.page.js"></script>
+    <script src="/js/pages/product/show.page.js"></script>
     <script src="/js/pages/produkte.page.js"></script>
     <!--SCRIPTS END-->
   </body>

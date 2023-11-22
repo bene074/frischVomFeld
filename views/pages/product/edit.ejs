@@ -1,0 +1,30 @@
+<div class="container">
+    <form action="/product/<%= product.id %>/update" method="post">
+        <!-- Name -->
+        <div class="form-group">
+            <label class="col-form-label-lg">Name</label>
+            <input type="text" class="form-control" maxlength="100" value="<%= product.name %>" name="name">
+        </div>
+
+        <!-- Price -->
+        <div class="form-group">
+            <label class="col-form-label-lg">Preis</label>
+            <input type="number" class="form-control" step="0.01" value="<%= product.price %>" name="price">
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+            <label class="col-form-label-lg">Beschreibung</label>
+            <input type="text" maxlength="255" class="form-control" value="<%= product.description %>" name="description">
+        </div>
+
+        <!-- Availability -->
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="availability" name="availability" <%= product.availability ? 'checked' : '' %>>
+            <label class="form-check-label" for="availability">Verfügbarkeit</label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Aktualisieren</button>
+    </form>
+</div>
