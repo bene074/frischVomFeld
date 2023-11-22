@@ -25,6 +25,13 @@ module.exports.routes = {
   'GET /addProduct' : {controller: 'ProductController', action: 'new'},
   'POST /product': { controller: 'ProductController', action:'create' },
   'GET /product': 'ProductController.find',
+  'GET /product/:id': 'product.findOne',
+  'GET /product/:id/destroy': { controller: 'ProductController', action: 'destroyOne' },
+  'GET /product/:id/edit': { controller: 'ProductController', action: 'editOne' },
+  'POST /product/:id/update': { controller: 'ProductController', action: 'updateOne' },
+
+
+
 
   'GET /category': { controller: 'CategoryController', action: 'find' },
   'GET /category/add': { view: 'pages/category/add' },

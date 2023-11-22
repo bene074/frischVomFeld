@@ -32,8 +32,6 @@ module.exports = {
         }
       })
     } else {
-      sails.log.debug("Produkte"+await Product.find().populate("category"))
-
       products = await Product.find().populate("category");
     }
     res.view ('pages/product/index', { products: products } );
@@ -41,25 +39,25 @@ module.exports = {
 
   findOne: async function (req, res) {
     sails.log.debug("List single product....")
-    let product = await product.findOne({ id: req.params.id });
+    let product = await Product.findOne({ id: req.params.id }).populate("category");
     res.view ('pages/product/show', { product: product } );
   },
 
   destroyOne: async function (req, res) {
     sails.log.debug("Destroy single product....")
-    await product.destroyOne({ id: req.params.id });
+    await Product.destroyOne({ id: req.params.id });
     res.redirect('/product');
   },
 
   editOne: async function (req, res) {
     sails.log.debug("Edit single product....")
-    let product = await product.findOne({ id: req.params.id }).populate('category');
+    let product = await Product.findOne({ id: req.params.id }).populate('category');
     res.view('pages/product/edit', { product: product });
   },
 
   updateOne: async function (req, res) {
     sails.log.debug("Update single product....")
-    let product = await product.updateOne({ id: req.params.id }).set(req.body);
+    let product = await Product.updateOne({ id: req.params.id }).set(req.body);
     res.redirect('/product');
   },
 

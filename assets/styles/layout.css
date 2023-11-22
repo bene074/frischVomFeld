@@ -1,7 +1,6 @@
 .fixed-logo {
   min-height: 20%;
-  width: 30%;
-  min-width: 20%;
+  min-width: 18%;
   cursor: pointer;
   display: block; /* Makes the image a block-level element to react to width and height properly */
   margin: 0 auto; /* Center the image if needed */
@@ -12,7 +11,7 @@
     display: none;
   }
   .fixed-logo {
-    height: 60%;
+    min-height: 60%;
     width: 55%; /* adjust as needed */
     margin-left: 0;
   }
