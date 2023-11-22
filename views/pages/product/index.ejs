@@ -56,8 +56,17 @@
             <% }); %>
             </tbody>
         </table>
-        <div class="padding-div-button ">
-            <a class="green-add-button margin-bottom-add-button" href="/addProduct">neues Produkt</a>
+        <div class="container">
+            <div class="row padding-div-button">
+                <!-- For small screens, each button takes full width (col-12).
+                     For medium screens and larger (col-md-6), buttons take half width. -->
+                <div class="col-12 col-md-6 mb-2">
+                    <a class="green-add-button w-100" href="/addProduct">neues Produkt</a>
+                </div>
+                <div class="col-12 col-md-6">
+                    <a class="green-add-button w-100" href="/addCategory">neue Kategorie</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

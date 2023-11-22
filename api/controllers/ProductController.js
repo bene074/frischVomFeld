@@ -17,9 +17,11 @@ module.exports = {
   create: async function (req, res) {
     sails.log.debug("Create product....")
     let params = req.allParams();
+    params.availability = (params.availability === 'on');
+    let categories = await Category.find();
     await Product.create(params);
     let products = await Product.find();
-    res.view ('pages/product/index', { products: products } );
+    res.view ('pages/product/index', { products: products, categories: categories,  selectedCategoryId: 'all' } );
   },
 
   find: async function (req, res) {

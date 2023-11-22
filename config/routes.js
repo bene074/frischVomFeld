@@ -34,7 +34,7 @@ module.exports.routes = {
 
 
   'GET /category': { controller: 'CategoryController', action: 'find' },
-  'GET /category/add': { view: 'pages/category/add' },
+  'GET /addCategory': { view: 'pages/category/add' },
   'POST /category': { controller: 'CategoryController', action:'create' },
   'GET /category/:id/destroy': { controller: 'CategoryController', action: 'destroyOne' },
 

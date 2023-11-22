@@ -13,14 +13,14 @@
                         <%= category.name %>
                     </td>
                     <td>
-                        <a href="/category/<%= category.id %>/destroy">Löschen</a>
+                        <a class="green-button" href="/category/<%= category.id %>/destroy">Löschen</a>
                     </td>
                 </tr>
             <% }); %>
             </tbody>
         </table>
 
-        <a class="green-button mt-4" href="/category/add">Hinzufügen</a>
+        <a class="green-add-button mt-4" href="/category/add">neue Kategorie</a>
     </div>
 </div>
-</div>
+
