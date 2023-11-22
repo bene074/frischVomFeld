@@ -25,6 +25,8 @@ module.exports = {
   find: async function (req, res) {
     sails.log.debug("List all products....")
     let products;
+    let categories = await Category.find();
+
     if (req.query.q && req.query.q.length > 0) {
       products = await Product.find({
         name: {
@@ -34,8 +36,31 @@ module.exports = {
     } else {
       products = await Product.find().populate("category");
     }
-    res.view ('pages/product/index', { products: products } );
+    res.view ('pages/product/index', { products: products , categories : categories} );
   },
+  findByCategory: async function (req, res) {
+    try {
+      // Überprüfen Sie, ob eine Kategorie-ID im Anfrageparameter vorhanden ist
+      if (!req.query.categoryId) {
+        return res.badRequest('Category ID is required.');
+      }
+  
+      // Suchen Sie die Produkte nach der angegebenen Kategorie-ID
+      let category = await Category.findOne({ id: req.query.categoryId });
+  
+      if (!category) {
+        return res.notFound('Category not found.');
+      }
+  
+      // Finden Sie nur die Produkte, die die ausgewählte Kategorie haben
+      let products = await Product.find({ category: req.query.categoryId }).populate('category');
+  
+      res.view('pages/product/index', { products: products, selectedCategory: category });
+    } catch (err) {
+      sails.log.error(err);
+      res.serverError('Internal Server Error');
+    }
+  }, 
 
   findOne: async function (req, res) {
     sails.log.debug("List single product....")

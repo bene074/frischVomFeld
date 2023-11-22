@@ -2,6 +2,16 @@
 
 
     <div class="item-content">
+        <div class="form-group">
+            <label for="filterDropdown">Filter:</label>
+            <select class="form-control" id="filterDropdown" onchange="applyFilter()">
+              <option value="all">Alle Produkte</option>
+              <% categories.forEach(function(category) { %>
+                <option value="<%= category.Name %>"><%= category.name %></option>
+              <% }); %>
+            </select>
+          </div> 
+
         <table class="table">
             <thead>
             <th>Name</th>
