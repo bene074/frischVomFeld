@@ -23,19 +23,35 @@ module.exports = {
   },
 
   find: async function (req, res) {
-    sails.log.debug("List all products....")
+    sails.log.debug("List all products....");
     let products;
+    let query = {};
+
     if (req.query.q && req.query.q.length > 0) {
-      products = await Product.find({
-        name: {
-          'contains': req.query.q
-        }
-      })
-    } else {
-      products = await Product.find().populate("category");
+      query.name = { 'contains': req.query.q };
     }
-    res.view ('pages/product/index', { products: products } );
+
+    if (req.query.categoryId && req.query.categoryId !== 'all') {
+      query.category = req.query.categoryId;
+    }
+    let selectedCategoryId = req.query.categoryId || 'all';
+
+
+    try {
+      // Fetch products based on the query
+      products = await Product.find(query).populate("category");
+
+      // Fetch all categories for the filter dropdown
+      let categories = await Category.find();
+      sails.log.debug(selectedCategoryId)
+      // Pass both products and categories to the view
+      res.view('pages/product/index', { products: products, categories: categories, selectedCategoryId: selectedCategoryId });
+    } catch (error) {
+      sails.log.error('Error fetching products:', error);
+      return res.serverError('Error occurred while fetching products.');
+    }
   },
+
 
   findOne: async function (req, res) {
     sails.log.debug("List single product....")
