@@ -1,0 +1,13 @@
+.with-fit-content{
+  width: fit-content;
+}
+
+
+.attribute-label {
+  font-weight: bold; /* Make the label text bold */
+  color: #333; /* Darker color for the label */
+}
+
+.attribute-value {
+  color: #666; /* Lighter color for the value */
+}

@@ -35,21 +35,3 @@ body, html{
   min-height: 100vh;
 }
 
-.green-button {
-  border-width: 3px;
-  border-style: solid;
-  border-color: #85A60F;
-  border-radius: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  color: #85A60F;
-  background-color: white;
-
-}
-
-.green-button:hover {
-  background-color: #85A60F;
-  color: white;
-}

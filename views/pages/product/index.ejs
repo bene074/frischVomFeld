@@ -5,28 +5,49 @@
         <table class="table">
             <thead>
             <th>Name</th>
-            <th>Preis</th>
+            <th>Preis in €</th>
+            <th>Kategorie</th>
             </thead>
             <tbody>
             <% products.forEach(function(product){ %>
                 <tr>
-                    <td>
+                    <td class="product-name">
                         <%= product.name %>
                     </td>
-                    <td>
+                    <td class="product-price">
                         <%= product.price %>
                     </td>
-                    <td>
+                    <td class="product-category">
                         <%= product.category.name %>
                     </td>
-                    <td> <a class="green-button" href="/product/<%= product.id %>">anzeigen</a></td>
-                    <td> <a class="green-button" href="/product/<%= product.id %>/edit">ändern</a></td>
-                    <td> <a class="green-button" href="/product/<%= product.id %>/destroy">löschen</a></td>
+                    <!-- Action Buttons for Larger Screens -->
+                    <td class="product-actions d-none d-md-table-cell">
+                        <a class="green-button" href="/product/<%= product.id %>">anzeigen</a>
+                        <a class="green-button" href="/product/<%= product.id %>/edit">ändern</a>
+                        <a class="green-button" href="/product/<%= product.id %>/destroy">löschen</a>
+                    </td>
+                </tr>
+                <!-- Action Buttons Row for Mobile Screens -->
+                <tr class="d-md-none">
+                    <td colspan="3">
+                        <div class="row">
+                            <div class="col-4">
+                                <a class="green-button" href="/product/<%= product.id %>">anzeigen</a>
+                            </div>
+                            <div class="col-4">
+                                <a class="green-button" href="/product/<%= product.id %>/edit">ändern</a>
+                            </div>
+                            <div class="col-4">
+                                <a class="green-button" href="/product/<%= product.id %>/destroy">löschen</a>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             <% }); %>
             </tbody>
         </table>
-        <a class="green-button" href="/addProduct">Hinzufügen</a>
+        <div class="padding-div-button ">
+            <a class="green-add-button margin-bottom-add-button" href="/addProduct">neues Produkt</a>
+        </div>
     </div>
-</div>
 </div>
