@@ -115,6 +115,7 @@
   height: 200px;
   object-fit: cover;
 }
+
 .image-description {
   margin-top: 10px;
   font-size: 14px;
@@ -138,6 +139,11 @@
   border-radius: 8px;
 }
 
+.cto-buttons-bottom:hover {
+  background-color: #006600;
+  color: white;
+}
+
 .button-row {
   display: flex;
   align-items: center;
@@ -150,10 +156,6 @@
   cursor: pointer; /* Ändert den Cursor, um anzuzeigen, dass es klickbar ist */
 }
 
-/* Änderungen bei Hover */
-.toggle-link:hover {
-  color: blue;
-}
 
 
 @media (max-width: 600px) {
