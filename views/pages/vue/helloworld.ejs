@@ -1,0 +1,14 @@
+<div id="app" class="container m-5">
+    {{ message }}
+</div>
+
+<script>
+    const { createApp } = Vue
+    createApp({
+        data() {
+            return {
+                message: 'Hello Vue!'
+            }
+        }
+    }).mount('#app')
+</script>

@@ -46,6 +46,8 @@ module.exports.routes = {
   'GET /login': { view: 'pages/login/login' },
   'GET /signup': { view: 'pages/login/signup' },
 
+  '/helloworld': { view: 'pages/vue/helloworld' },
+
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
