@@ -38,6 +38,15 @@ module.exports.routes = {
   'POST /category': { controller: 'CategoryController', action:'create' },
   'GET /category/:id/destroy': { controller: 'CategoryController', action: 'destroyOne' },
 
+  'GET /shoppingbasket': { view: 'pages/shoppingbasket/index' },
+  'GET /admin': { view: 'pages/admin/index' },
+  'GET /evaluation': { view: 'pages/evaluation/index' },
+  'GET /feedback': { view: 'pages/feedback/index' },
+  'GET /order': { view: 'pages/order/index' },
+  'GET /login': { view: 'pages/login/login' },
+  'GET /signup': { view: 'pages/login/signup' },
+
+  '/helloworld': { view: 'pages/vue/helloworld' },
 
   /***************************************************************************
   *                                                                          *
