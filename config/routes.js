@@ -21,14 +21,29 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
 
+  'GET /login':                          { action: 'login/view-login' },
+  'GET /signup':                         { action: 'login/view-signup' },
 
-  'GET /addProduct' : {controller: 'ProductController', action: 'new'},
-  'POST /product': { controller: 'ProductController', action:'create' },
+  'GET /logout':                         { action: 'account/logout' },
+  'POST  /login':                        { action: 'login/login' },
+  'POST  /signup':                       { action: 'login/signup' },
+  'POST  /updateProfile':                { action: 'account/update-profile' },
+  'POST  /updatePassword':               { action: 'account/update-password' },
+
+  'GET /account':                        { action: 'account/view-account-overview' },
+  'GET /account/password':               { action: 'account/view-edit-password' },
+  'GET /account/profile':                { action: 'account/view-edit-profile' },
+
+  'POST  /updateProfile':                { action: 'account/update-profile' },
+  'POST  /updatePassword':               { action: 'account/update-password' },
+
+  'GET /addProduct' :                    {controller: 'ProductController', action: 'new'},
+  'POST /product':                       { controller: 'ProductController', action:'create' },
   'GET /product': 'ProductController.find',
   'GET /product/:id': 'product.findOne',
-  'GET /product/:id/destroy': { controller: 'ProductController', action: 'destroyOne' },
-  'GET /product/:id/edit': { controller: 'ProductController', action: 'editOne' },
-  'POST /product/:id/update': { controller: 'ProductController', action: 'updateOne' },
+  'GET /product/:id/destroy':            { controller: 'ProductController', action: 'destroyOne' },
+  'GET /product/:id/edit':               { controller: 'ProductController', action: 'editOne' },
+  'POST /product/:id/update':            { controller: 'ProductController', action: 'updateOne' },
 
 
 
@@ -43,8 +58,7 @@ module.exports.routes = {
   'GET /evaluation': { view: 'pages/evaluation/index' },
   'GET /feedback': { view: 'pages/feedback/index' },
   'GET /order': { view: 'pages/order/index' },
-  'GET /login': { view: 'pages/login/login' },
-  'GET /signup': { view: 'pages/login/signup' },
+ 
 
   '/helloworld': { view: 'pages/vue/helloworld' },
 

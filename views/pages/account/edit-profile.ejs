@@ -7,27 +7,34 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="full-name">Full name</label>
-            <input class="form-control" id="full-name" name="fullName" type="text"  placeholder="Sturgis P. Sturgeon" autocomplete="name" focus-first value="<%= req.me.fullName %>">
-            <div class="invalid-feedback">Please enter your full name.</div>
+            <label for="firstName">Vorname</label>
+            <input class="form-control" id="firstName" name="firstName" type="text"  placeholder="Max" autocomplete="firstName" focus-first value="<%= req.me.firstName %>">
+            <div class="invalid-feedback">Bitte gebe deinen Vornamen ein.</div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="email-address">Email address</label>
+            <label for="lastName">Nachname</label>
+            <input class="form-control" id="lastName" name="lastName" type="text"  placeholder="Mustermann" autocomplete="lastName" focus-first value="<%= req.me.lastName %>">
+            <div class="invalid-feedback">Bitte gebe deinen Nachnamen ein.</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="email-address">E-Mail Adresse</label>
             <input class="form-control" id="email-address" name="emailAddress" type="email" placeholder="sturgeon@example.com" autocomplete="email" value="<%= req.me.emailAddress %>">
-            <div class="invalid-feedback">Please enter a valid email address.</div>
+            <div class="invalid-feedback">Bitte gebe eine gültige E-Mail Adresse ein.</div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
-          There is already an account using that email address.
+          Es gibt bereits ein Konto mit dieser E-Mail-Adresse.
         </div>
         <div class="col-sm-6">
           <div class="form-group text-right">
-            <a class="btn btn-outline-info" href="/account">Cancel</a>
-            <button type="submit"  class="btn btn-dark">Save changes</button>
+            <a class="btn btn-outline-info" href="/account">Abbrechen</a>
+            <button type="submit"  class="btn btn-dark">Änderungen speichern</button>
           </div>
         </div>
       </div>
