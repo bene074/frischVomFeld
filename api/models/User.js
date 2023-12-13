@@ -81,6 +81,11 @@ by a large team, those administrative features might be split across a few diffe
 
 So, while this \`isSuperAdmin\` demarcation might not be the right approach forever, it's a good place to start.`
     },
+
+    isVendor: {
+      type: 'boolean',
+      description: "Whether user is a vendor and has extra rights to add Products"
+    }
   },
 
 };

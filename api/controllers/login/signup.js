@@ -85,6 +85,7 @@ the account verification message.)`,
 
     // Build up data for the new user record and save it to the database.
     // (Also use `fetch` to retrieve the new ID so that we can use it below.)
+    sails.log.info("testestsest")
     var newUserRecord = await User.create(_.extend({
       firstName,
       lastName,
@@ -103,8 +104,10 @@ the account verification message.)`,
 
     // Store the user's new id in their session.
     this.req.session.userId = newUserRecord.id;
-  
+
     if (!this.req.wantsJSON) {
+      sails.log.info("redirect /")
+      sails.log.info(this.req.wantsJSON)
       throw {redirect: '/'};
     }
   }

@@ -17,6 +17,19 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
+  '*': 'is-logged-in',
 
+  // Bypass the `is-logged-in` policy for:
+  'login/*': true,
+  'account/logout': true,
+  '/':true,
+  'view-admin': 'is-super-admin',
+
+  ProductController: {
+    '*': ['is-super-admin', 'is-vendor']
+  },
+
+  CategoryController: {
+    '*': ['is-super-admin', 'is-vendor']
+  }
 };

@@ -4,7 +4,7 @@
     <div style="max-width: 450px;" class="mx-auto" >
       <p class="text-center">Bestelle noch heute die besten Produkte .</p>
       <hr/>
-      <form action="signup" method="POST">
+      <form action="/signup" method="POST">
         <div class="form-group">
           <label for="first-name">Vorname</label>
           <input class="form-control" id="firstName" name="firstName" type="text"  placeholder="Max " autocomplete="firstName" focus-first>
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
           <label for="email-address">E-Mail Adresse</label>
-          <input class="form-control" id="emaila-address" name="emailAddress" type="email"  placeholder="MMustermann@example.com" autocomplete="email">
+          <input class="form-control" id="emaila-address" name="emailAddress" type="email"  placeholder="Mustermann@example.com" autocomplete="email">
           <div class="invalid-feedback">Bitte geben Sie eine gültige E-Mail Adresse ein.</div>
         </div>
         <div class="form-group">
@@ -32,13 +32,13 @@
         </div>
         <div class="form-group form-check">
           <input class="form-check-input" id="terms-agreement" name="termsAgreement" type="checkbox" v-model="formData.agreed">
-          <label for="terms-agreement" class="form-check-label">I have read &amp; agree to the <a target="_blank" href="/terms">terms of service</a>.</label>
+          <label for="terms-agreement" class="form-check-label">Ich habe die <a target="_blank" href="/terms">AGBs</a> gelesen und aktzeptiere diese.</label>
         </div>
         <span>It looks like there's already an account with your email address. If you forgot your password, you can recover it <a href="/account/password">here</a>.</span>
         <div class="form-group">
           <button type="submit" class="custom-button1">Account erstellen</button>
         </div>
-      </ajax>
+      </form>
       <p class="text-center">Du hast bereits einen Account? <a href="/login">Login</a></p>
     </div>
   </div>

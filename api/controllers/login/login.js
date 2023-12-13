@@ -33,7 +33,7 @@ password attempt.`,
       extendedDescription:
 `Note that this is NOT SUPPORTED when using virtual requests (e.g. sending
 requests over WebSockets instead of HTTP).`,
-      type: 'boolean'
+      type: 'string'
     }
 
   },
@@ -62,7 +62,7 @@ and exposed as \`req.me\`.)`
     badCombo: {
       description: `The provided email and password combination does not
       match any user in the database.`,
-      responseType: 'unauthorized'
+      responseType: 'forbidden'
       // ^This uses the custom `unauthorized` response located in `api/responses/unauthorized.js`.
       // To customize the generic "unauthorized" response across this entire app, change that file
       // (see api/responses/unauthorized).
@@ -76,7 +76,10 @@ and exposed as \`req.me\`.)`
 
 
   fn: async function ({emailAddress, password, rememberMe}) {
+    sails.log.info(rememberMe)
 
+    //converts string to boolean
+    rememberMe = rememberMe ? (rememberMe === 'on') : false;
     // Look up by the email address.
     // (note that we lowercase it to ensure the lookup is always case-insensitive,
     // regardless of which database we're using)
@@ -100,7 +103,7 @@ and exposed as \`req.me\`.)`
     // this to work.)
     // Beispiel für die Verarbeitung des rememberMe-Parameters auf der Serverseite (Sails.js-Controller)
 
-    if (rememberMe) {
+    if (rememberMe === "on") {
       if (this.req.isSocket) {
         sails.log.warn(
           'Received `rememberMe: true` from a virtual request, but it was ignored\n'+
@@ -123,7 +126,7 @@ and exposed as \`req.me\`.)`
 //    }
 
     if (!this.req.wantsJSON) {
-      throw {redirect: '/welcome'};
+      throw {redirect: '/'};
     }
 
 

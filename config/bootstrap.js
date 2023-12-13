@@ -27,4 +27,22 @@ module.exports.bootstrap = async function() {
   // ]);
   // ```
 
+  if (await User.count() > 0) {
+    return;
+  }
+
+  await User.createEach([
+    {
+      emailAddress: 'a@b.de',
+      emailStatus: 'confirmed',
+      password: await sails.helpers.passwords.hashPassword('123'),
+      firstName: 'Super',
+      lastName: 'Admin',
+      isSuperAdmin: true,
+      isVendor: false,
+    }
+  ])
+    .intercept('E_UNIQUE', 'emailAlreadyInUse')
+    .intercept({name: 'UsageError'}, 'invalid');
+
 };

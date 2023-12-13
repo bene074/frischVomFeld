@@ -34,9 +34,6 @@ module.exports.routes = {
   'GET /account/password':               { action: 'account/view-edit-password' },
   'GET /account/profile':                { action: 'account/view-edit-profile' },
 
-  'POST  /updateProfile':                { action: 'account/update-profile' },
-  'POST  /updatePassword':               { action: 'account/update-password' },
-
   'GET /addProduct' :                    {controller: 'ProductController', action: 'new'},
   'POST /product':                       { controller: 'ProductController', action:'create' },
   'GET /product': 'ProductController.find',
@@ -58,7 +55,7 @@ module.exports.routes = {
   'GET /evaluation': { view: 'pages/evaluation/index' },
   'GET /feedback': { view: 'pages/feedback/index' },
   'GET /order': { view: 'pages/order/index' },
- 
+
 
   '/helloworld': { view: 'pages/vue/helloworld' },
 

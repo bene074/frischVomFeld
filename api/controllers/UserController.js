@@ -10,8 +10,10 @@ module.exports = {
   create: async function (req, res) {
     try {
       const newUser = await User.create(req.body).fetch();
+      sails.log.info(newUser)
       return res.status(201).json(newUser);
     } catch (err) {
+      sails.log.error(err)
       return res.serverError(err);
     }
   },
