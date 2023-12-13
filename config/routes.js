@@ -33,6 +33,7 @@ module.exports.routes = {
   'GET /account':                        { action: 'account/view-account-overview' },
   'GET /account/password':               { action: 'account/view-edit-password' },
   'GET /account/profile':                { action: 'account/view-edit-profile' },
+  'GET /account/usermanagement':         { action: 'account/view-usermanagement' },
 
   'POST  /updateProfile':                { action: 'account/update-profile' },
   'POST  /updatePassword':               { action: 'account/update-password' },
@@ -58,6 +59,7 @@ module.exports.routes = {
   'GET /evaluation': { view: 'pages/evaluation/index' },
   'GET /feedback': { view: 'pages/feedback/index' },
   'GET /order': { view: 'pages/order/index' },
+  'GET /usermanagement': { view: 'pages/account/usermanagement' },
  
 
   '/helloworld': { view: 'pages/vue/helloworld' },
