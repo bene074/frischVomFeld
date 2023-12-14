@@ -1,7 +1,34 @@
-<div id="index" v-cloak>
-
-  <h1>TODO: Implement this page Order.</h1>
-  <p>(See also <em>assets/styles/pages/order/index.less</em>, <em>assets/js/pages/order/index.page.js</em>, and <em>api/controllers/order/view-index.js</em>.)</p>
-
+<!-- views/pages/order/shoppingbasket.ejs -->
+<div id="app" class="container">
+    <h2>Shopping Basket</h2>
+    <ul>
+        <li v-for="(item, index) in basket" :key="index">
+            {{ item.name }} - {{ item.price }}
+            <!-- Add a button to remove item from the basket -->
+            <button @click="removeItem(index)">Remove</button>
+        </li>
+    </ul>
+    <p v-if="basket.length === 0">Your basket is empty.</p>
 </div>
-<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+  const { createApp } = Vue;
+  createApp({
+    data() {
+      return {
+        basket: []
+      };
+    },
+    methods: {
+      removeItem(index) {
+        this.basket.splice(index, 1);
+        // Here you can also make an API call to update the server-side session
+      }
+    },
+    mounted() {
+      // Here you can load the initial basket data from the server or session
+      // For example, using a fetch request or another method
+    }
+  }).mount('#app');
+</script>

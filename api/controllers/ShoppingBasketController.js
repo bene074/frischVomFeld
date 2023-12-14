@@ -6,21 +6,26 @@
  */
 
 const Sails = require("sails/lib/app/Sails");
+const Product = require('../models/Product');
+
 
 module.exports = {
 
 
-    show: async function (req, res) {
-        res.view('pages/order/shoppingbasket');
-    },
+  show: async function (req, res) {
+    res.view('pages/order/shoppingbasket', {
+      initialBasket: req.session.basket || []
+    });
+  },
 
-    put: async function (req, res) {
-        let meal = await Meal.findOne({ id: req.params.mealid });
+
+  put: async function (req, res) {
+        let product = await Product.findOne({ id: req.params.productid });
         if (!req.session.basket) {
             req.session.basket = [];
-            req.session.basket.push(meal);
+            req.session.basket.push(product);
         } else {
-            req.session.basket.push(meal);
+            req.session.basket.push(product);
         }
         // All done.
         res.redirect('/shoppingbasket');
