@@ -15,12 +15,12 @@ module.exports = {
     },
 
     put: async function (req, res) {
-        let meal = await Meal.findOne({ id: req.params.mealid });
+        let product = await Product.findOne({ id: req.params.productid });
         if (!req.session.basket) {
             req.session.basket = [];
-            req.session.basket.push(meal);
+            req.session.basket.push(product);
         } else {
-            req.session.basket.push(meal);
+            req.session.basket.push(product);
         }
         // All done.
         res.redirect('/shoppingbasket');
