@@ -50,7 +50,6 @@ module.exports.routes = {
   'POST /category': { controller: 'CategoryController', action:'create' },
   'GET /category/:id/destroy': { controller: 'CategoryController', action: 'destroyOne' },
 
-  'GET /shoppingbasket': { view: 'pages/shoppingbasket/index' },
   'GET /admin': { view: 'pages/admin/index' },
   'GET /evaluation': { view: 'pages/evaluation/index' },
   'GET /feedback': { view: 'pages/feedback/index' },
@@ -59,6 +58,10 @@ module.exports.routes = {
 
   '/helloworld': { view: 'pages/vue/helloworld' },
 
+
+  'GET /shoppingbasket': 'ShoppingBasketController.show',
+  'POST /shoppingbasket/add/:productid': 'ShoppingBasketController.put',
+  'POST /shoppingbasket/remove/:index': 'ShoppingBasketController.remove',
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *

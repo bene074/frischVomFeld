@@ -6,15 +6,20 @@
  */
 
 const Sails = require("sails/lib/app/Sails");
+const Product = require('../models/Product');
+
 
 module.exports = {
 
 
-    show: async function (req, res) {
-        res.view('pages/order/shoppingbasket');
-    },
+  show: async function (req, res) {
+    res.view('pages/order/shoppingbasket', {
+      initialBasket: req.session.basket || []
+    });
+  },
 
-    put: async function (req, res) {
+
+  put: async function (req, res) {
         let product = await Product.findOne({ id: req.params.productid });
         if (!req.session.basket) {
             req.session.basket = [];
