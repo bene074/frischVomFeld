@@ -1,0 +1,5 @@
+.btn-custom {
+    background-color: green;
+    color: white;
+    margin-bottom: 10px; /* Add 10px space below each button */
+  }
