@@ -50,14 +50,19 @@ module.exports.routes = {
   'POST /category': { controller: 'CategoryController', action:'create' },
   'GET /category/:id/destroy': { controller: 'CategoryController', action: 'destroyOne' },
 
-  'GET /shoppingbasket': { view: 'pages/shoppingbasket/index' },
   'GET /admin': { view: 'pages/admin/index' },
   'GET /evaluation': { view: 'pages/evaluation/index' },
   'GET /feedback': { view: 'pages/feedback/index' },
-  'GET /order': { view: 'pages/order/index' },
 
 
   '/helloworld': { view: 'pages/vue/helloworld' },
+
+
+  'GET /shoppingbasket': 'ShoppingBasketController.show',
+  'POST /shoppingbasket/add/:productid': 'ShoppingBasketController.put',
+  'POST /shoppingbasket/remove/:index': 'ShoppingBasketController.remove',
+  'POST /shoppingbasket/clear': 'ShoppingBasketController.clear',
+  'POST /shoppingbasket/order': 'ShoppingBasketController.order',
 
   /***************************************************************************
   *                                                                          *

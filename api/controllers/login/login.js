@@ -129,6 +129,7 @@ and exposed as \`req.me\`.)`
       throw {redirect: '/'};
     }
 
+    sails.debug(req.me)
 
   }
 

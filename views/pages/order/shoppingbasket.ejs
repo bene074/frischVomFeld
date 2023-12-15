@@ -1,0 +1,65 @@
+<!-- views/pages/order/shoppingbasket.ejs -->
+<div id="app" class="container mt-4">
+    <h2 class="mb-3">Warenkorb</h2>
+
+    <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(item, index) in basket" :key="index">
+            <div>
+                <h5 class="my-0">{{ item.name }}</h5>
+                <small class="text-muted">Preis: {{ item.price }}€</small>
+            </div>
+
+            <span>
+                <button class="btn btn-danger btn-sm" @click="removeItem(index)">Entfernen</button>
+            </span>
+        </li>
+    </ul>
+    <p class="text-center" v-if="basket.length === 0">Der Warenkorb ist leider leer.</p>
+
+    <div class="buttons">
+        <button class="btn btn-secondary" @click="clearBasket" v-if="basket.length > 0">Warenkorb leeren</button>
+        <button class="btn btn-primary" @click="placeOrder" v-if="basket.length > 0">Bestellen</button>
+        <a href="/product" class="btn btn-info" v-if="basket.length > 0">Weiter einkaufen</a>
+        <a href="/product" class="btn btn-info" v-if="basket.length === 0">Waren ansehen</a>
+    </div>
+
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+  const { createApp } = Vue;
+  createApp({
+    data() {
+      return {
+        basket: <%- JSON.stringify(initialBasket) %>
+      };
+    },
+    methods: {
+      removeItem(index) {
+        fetch(`/shoppingbasket/remove/${index}`, { method: 'POST' })
+          .then(() => {
+            this.basket.splice(index, 1);
+          })
+          .catch(error => console.error('Error:', error));
+      },
+      clearBasket() {
+        fetch('/shoppingbasket/clear', { method: 'POST' })
+          .then(() => {
+            this.basket = [];
+          })
+          .catch(error => console.error('Error:', error));
+      },
+      placeOrder() {
+        fetch('/shoppingbasket/order', { method: 'POST' })
+          .then(() => {
+            this.basket = [];
+          })
+          .catch(error => console.error('Error:', error));
+      }
+    },
+    mounted() {
+      // Here you can load the initial basket data from the server or session
+      // For example, using a fetch request or another method
+    }
+  }).mount('#app');
+</script>
