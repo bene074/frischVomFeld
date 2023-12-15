@@ -53,7 +53,6 @@ module.exports.routes = {
   'GET /admin': { view: 'pages/admin/index' },
   'GET /evaluation': { view: 'pages/evaluation/index' },
   'GET /feedback': { view: 'pages/feedback/index' },
-  'GET /order': { view: 'pages/order/index' },
 
 
   '/helloworld': { view: 'pages/vue/helloworld' },
@@ -62,6 +61,9 @@ module.exports.routes = {
   'GET /shoppingbasket': 'ShoppingBasketController.show',
   'POST /shoppingbasket/add/:productid': 'ShoppingBasketController.put',
   'POST /shoppingbasket/remove/:index': 'ShoppingBasketController.remove',
+  'POST /shoppingbasket/clear': 'ShoppingBasketController.clear',
+  'POST /shoppingbasket/order': 'ShoppingBasketController.order',
+
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *

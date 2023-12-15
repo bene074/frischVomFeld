@@ -1,14 +1,28 @@
 <!-- views/pages/order/shoppingbasket.ejs -->
-<div id="app" class="container">
-    <h2>Shopping Basket</h2>
-    <ul>
-        <li v-for="(item, index) in basket" :key="index">
-            {{ item.name }} - {{ item.price }}
-            <!-- Add a button to remove item from the basket -->
-            <button @click="removeItem(index)">Remove</button>
+<div id="app" class="container mt-4">
+    <h2 class="mb-3">Warenkorb</h2>
+
+    <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(item, index) in basket" :key="index">
+            <div>
+                <h5 class="my-0">{{ item.name }}</h5>
+                <small class="text-muted">Preis: {{ item.price }}€</small>
+            </div>
+
+            <span>
+                <button class="btn btn-danger btn-sm" @click="removeItem(index)">Entfernen</button>
+            </span>
         </li>
     </ul>
-    <p v-if="basket.length === 0">Your basket is empty.</p>
+    <p class="text-center" v-if="basket.length === 0">Der Warenkorb ist leider leer.</p>
+
+    <div class="buttons">
+        <button class="btn btn-secondary" @click="clearBasket" v-if="basket.length > 0">Warenkorb leeren</button>
+        <button class="btn btn-primary" @click="placeOrder" v-if="basket.length > 0">Bestellen</button>
+        <a href="/product" class="btn btn-info" v-if="basket.length > 0">Weiter einkaufen</a>
+        <a href="/product" class="btn btn-info" v-if="basket.length === 0">Waren ansehen</a>
+    </div>
+
 </div>
 
 <script src="https://unpkg.com/vue@next"></script>
@@ -17,13 +31,30 @@
   createApp({
     data() {
       return {
-        basket: []
+        basket: <%- JSON.stringify(initialBasket) %>
       };
     },
     methods: {
       removeItem(index) {
-        this.basket.splice(index, 1);
-        // Here you can also make an API call to update the server-side session
+        fetch(`/shoppingbasket/remove/${index}`, { method: 'POST' })
+          .then(() => {
+            this.basket.splice(index, 1);
+          })
+          .catch(error => console.error('Error:', error));
+      },
+      clearBasket() {
+        fetch('/shoppingbasket/clear', { method: 'POST' })
+          .then(() => {
+            this.basket = [];
+          })
+          .catch(error => console.error('Error:', error));
+      },
+      placeOrder() {
+        fetch('/shoppingbasket/order', { method: 'POST' })
+          .then(() => {
+            this.basket = [];
+          })
+          .catch(error => console.error('Error:', error));
       }
     },
     mounted() {
