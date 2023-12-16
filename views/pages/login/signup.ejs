@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
           <label for="email-address">E-Mail Adresse</label>
-          <input class="form-control" id="emaila-address" name="emailAddress" type="email"  placeholder="Mustermann@example.com" autocomplete="email">
+          <input class="form-control" id="email-address" name="emailAddress" type="email"  placeholder="Mustermann@example.com" autocomplete="email">
           <div class="invalid-feedback">Bitte geben Sie eine gültige E-Mail Adresse ein.</div>
         </div>
         <div class="form-group">
@@ -33,6 +33,10 @@
         <div class="form-group form-check">
           <input class="form-check-input" id="terms-agreement" name="termsAgreement" type="checkbox" v-model="formData.agreed">
           <label for="terms-agreement" class="form-check-label">Ich habe die <a target="_blank" href="/terms">AGBs</a> gelesen und aktzeptiere diese.</label>
+        </div>
+        <div class="form-group form-check">
+          <input class="form-check-input" id="is-vendor" name="isVendor" type="checkbox" v-model="formData.isVendor">
+          <label for="is-vendor" class="form-check-label">Ich will einen Anbieter Account erstellen.</label>
         </div>
         <span>It looks like there's already an account with your email address. If you forgot your password, you can recover it <a href="/account/password">here</a>.</span>
         <div class="form-group">

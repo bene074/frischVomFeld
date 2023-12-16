@@ -47,6 +47,12 @@ the account verification message.)`,
       type: 'string',
       example: 'Frida Kahlo de Rivera',
       description: 'The user\'s last name.',
+    },
+
+    isVendor: {
+      required: false,
+      type: 'string',
+      description: 'flag if the user is a Vendor'
     }
 
   },
@@ -79,19 +85,21 @@ the account verification message.)`,
   },
 
 
-  fn: async function ({emailAddress, password, firstName, lastName}) {
+  fn: async function ({emailAddress, password, firstName, lastName, isVendor}) {
 
     var newEmailAddress = emailAddress.toLowerCase();
 
+
+    var isVendorFlag = isVendor === "on";
     // Build up data for the new user record and save it to the database.
     // (Also use `fetch` to retrieve the new ID so that we can use it below.)
-    sails.log.info("testestsest")
     var newUserRecord = await User.create(_.extend({
       firstName,
       lastName,
       emailAddress: newEmailAddress,
       password: await sails.helpers.passwords.hashPassword(password),
-      tosAcceptedByIp: this.req.ip
+      tosAcceptedByIp: this.req.ip,
+      isVendor: isVendorFlag,
     }, sails.config.custom.verifyEmailAddresses? {
       emailProofToken: await sails.helpers.strings.random('url-friendly'),
       emailProofTokenExpiresAt: Date.now() + sails.config.custom.emailProofTokenTTL,

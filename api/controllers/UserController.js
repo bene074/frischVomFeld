@@ -9,8 +9,10 @@ module.exports = {
   // Create a new user
   create: async function (req, res) {
     try {
-      const newUser = await User.create(req.body).fetch();
-      sails.log.info(newUser)
+      const isVendor = req.body.isVendor;
+
+      const newUser = await User.create(req.body, isVendor).fetch();
+      sails.log.info("neuer User: ",newUser)
       return res.status(201).json(newUser);
     } catch (err) {
       sails.log.error(err)

@@ -68,6 +68,10 @@ module.exports.routes = {
   'POST /shoppingbasket/remove/:index': 'ShoppingBasketController.remove',
   'POST /shoppingbasket/clear': 'ShoppingBasketController.clear',
   'POST /shoppingbasket/order': 'ShoppingBasketController.order',
+  'GET /product/:id/uploadImageForm': { controller: 'ProductController', action: 'uploadImageForm' },
+  'POST /product/:id/uploadImage': { controller: 'ProductController', action: 'uploadImage' },
+
+
 
   /***************************************************************************
   *                                                                          *

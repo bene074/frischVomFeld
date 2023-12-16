@@ -58,18 +58,17 @@
             </div>
 
             <!-- Image -->
-            <div class="row">
-                <div class="col-md-4 col-12 attribute-label">
-                    Bild
+            <% if(product.image) { %>
+                <div class="row">
+                    <div class="col-md-4 col-12 attribute-label">
+                        Bild
+                    </div>
+                    <div class="col-md-8 col-12 attribute-value">
+                        <img src="https://wetebucket.s3.us-west-2.amazonaws.com/<%= product.image %>">
+                    </div>
                 </div>
-                <div class="col-md-8 col-12 attribute-value">
-                    <% if (product.image) { %>
-                        <img src="<%= product.image %>" alt="Produktbild" style="max-width: 100%; height: auto;">
-                    <% } else { %>
-                        Kein Bild verfügbar
-                    <% } %>
-                </div>
-            </div>
+            <% } %>
+
             <form action="/shoppingbasket/add/<%= product.id %>" method="POST">
                 <button type="submit" class="btn btn-primary">Add to Shopping Basket</button>
             </form>

@@ -44,5 +44,4 @@ module.exports.bootstrap = async function() {
   ])
     .intercept('E_UNIQUE', 'emailAlreadyInUse')
     .intercept({name: 'UsageError'}, 'invalid');
-
 };
