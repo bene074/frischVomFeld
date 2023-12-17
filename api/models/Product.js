@@ -33,6 +33,9 @@ module.exports = {
     },
     category: {
       model : 'category'
+    },
+    user: {
+      model: 'user'
     }
   },
   tableName: 'Product'

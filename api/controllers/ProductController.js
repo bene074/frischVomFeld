@@ -25,7 +25,7 @@ module.exports = {
   },
 
   find: async function (req, res) {
-    sails.log.debug(req.me)
+    sails.log.debug(req.session.userID)
     sails.log.debug("List all products....");
     let products;
     let query = {};
