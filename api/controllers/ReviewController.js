@@ -8,13 +8,21 @@
 module.exports = {
   // Create a new review
   create: async function (req, res) {
+    let reviewParams = {
+      value: req.body.value,
+      product: req.body.productId,
+      user: req.session.userId // Assuming the user ID is in the session
+    };
+
     try {
-      const newReview = await Review.create(req.body).fetch();
-      return res.status(201).json(newReview);
-    } catch (err) {
-      return res.serverError(err);
+      await Review.create(reviewParams);
+      res.redirect('/product/' + req.body.productId); // Redirect back to the product page
+    } catch (error) {
+      res.serverError(error.toString());
     }
   },
+
+
 
   // Read review information
   read: async function (req, res) {
@@ -43,15 +51,23 @@ module.exports = {
 
   // Delete a review
   delete: async function (req, res) {
+    const reviewId = req.params.id;
+    const userId = req.session.userId; // Assuming user ID is stored in session
+
     try {
-      const deletedReview = await Review.destroyOne({reviewID: req.params.id});
-      if (deletedReview) {
-        return res.status(200).json(deletedReview);
-      } else {
-        return res.notFound();
+      const review = await Review.findOne({ id: reviewId });
+      if (!review) {
+        return res.notFound('Review not found.');
       }
-    } catch (err) {
-      return res.serverError(err);
+
+      if (review.user !== userId) {
+        return res.forbidden('You are not allowed to delete this review.');
+      }
+
+      await Review.destroyOne({ id: reviewId });
+      res.redirect('/product/' + review.product); // Redirect back to the product page
+    } catch (error) {
+      res.serverError(error.toString());
     }
   }
 }

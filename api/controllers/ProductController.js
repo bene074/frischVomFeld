@@ -18,14 +18,15 @@ module.exports = {
     sails.log.debug("Create product....")
     let params = req.allParams();
     params.availability = (params.availability === 'on');
+    params.user = req.me.id
     let categories = await Category.find();
     await Product.create(params);
     let products = await Product.find();
+    sails.log.debug(products)
     res.view ('pages/product/index', { products: products, categories: categories,  selectedCategoryId: 'all' } );
   },
 
   find: async function (req, res) {
-    sails.log.debug(req.session.userID)
     sails.log.debug("List all products....");
     let products;
     let query = {};
@@ -37,6 +38,11 @@ module.exports = {
     if (req.query.categoryId && req.query.categoryId !== 'all') {
       query.category = req.query.categoryId;
     }
+
+    if (req.me?.isVendor) {
+      query.user = req.me.id;
+    }
+
     let selectedCategoryId = req.query.categoryId || 'all';
 
 
@@ -59,7 +65,8 @@ module.exports = {
   findOne: async function (req, res) {
     sails.log.debug("List single product....")
     let product = await Product.findOne({ id: req.params.id }).populate("category");
-    res.view ('pages/product/show', { product: product } );
+    let reviews = await Review.find({ product: req.params.id }).populate("user");
+    res.view ('pages/product/show', { product: product, reviews: reviews } );
   },
 
   destroyOne: async function (req, res) {
