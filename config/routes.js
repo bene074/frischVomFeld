@@ -42,6 +42,8 @@ module.exports.routes = {
   'GET /product/:id/edit':               { controller: 'ProductController', action: 'editOne' },
   'POST /product/:id/update':            { controller: 'ProductController', action: 'updateOne' },
 
+  'POST /review/create': 'ReviewController.create',
+  'POST /review/delete/:id': 'ReviewController.delete',
 
 
 
@@ -50,14 +52,28 @@ module.exports.routes = {
   'POST /category': { controller: 'CategoryController', action:'create' },
   'GET /category/:id/destroy': { controller: 'CategoryController', action: 'destroyOne' },
 
-  'GET /shoppingbasket': { view: 'pages/shoppingbasket/index' },
   'GET /admin': { view: 'pages/admin/index' },
   'GET /evaluation': { view: 'pages/evaluation/index' },
   'GET /feedback': { view: 'pages/feedback/index' },
-  'GET /order': { view: 'pages/order/index' },
+
+  'GET /usermanagement': { controller: 'UsermanagementController', action: 'find' },
+  'GET /usermanagement/:id/destroy': { controller: 'UsermanagementController', action: 'destroyOne' },
+
+
 
 
   '/helloworld': { view: 'pages/vue/helloworld' },
+
+
+  'GET /shoppingbasket': 'ShoppingBasketController.show',
+  'POST /shoppingbasket/add/:productid': 'ShoppingBasketController.put',
+  'POST /shoppingbasket/remove/:index': 'ShoppingBasketController.remove',
+  'POST /shoppingbasket/clear': 'ShoppingBasketController.clear',
+  'POST /shoppingbasket/order': 'ShoppingBasketController.order',
+  'GET /product/:id/uploadImageForm': { controller: 'ProductController', action: 'uploadImageForm' },
+  'POST /product/:id/uploadImage': { controller: 'ProductController', action: 'uploadImage' },
+
+
 
   /***************************************************************************
   *                                                                          *

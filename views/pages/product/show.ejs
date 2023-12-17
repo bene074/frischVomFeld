@@ -58,18 +58,45 @@
             </div>
 
             <!-- Image -->
-            <div class="row">
-                <div class="col-md-4 col-12 attribute-label">
-                    Bild
+            <% if(product.image) { %>
+                <div class="row">
+                    <div class="col-md-4 col-12 attribute-label">
+                        Bild
+                    </div>
+                    <div class="col-md-8 col-12 attribute-value">
+                        <img src="https://wetebucket.s3.us-west-2.amazonaws.com/<%= product.image %>">
+                    </div>
                 </div>
-                <div class="col-md-8 col-12 attribute-value">
-                    <% if (product.image) { %>
-                        <img src="<%= product.image %>" alt="Produktbild" style="max-width: 100%; height: auto;">
-                    <% } else { %>
-                        Kein Bild verfügbar
-                    <% } %>
-                </div>
+            <% } %>
+
+            <div class="reviews-section">
+                <h4>Product Reviews</h4>
+                <% reviews.forEach(function(review) { %>
+                    <div class="review">
+                        <p><%= review.value %></p>
+                        <p>Reviewed by: <%= review.user.firstName %></p>
+                        <%if (review.user.id === req.me?.id) { %>
+                            <form action="/review/delete/<%= review.id %>" method="POST">
+                                <button type="submit">Delete Review</button>
+                            </form>
+                        <% } %>
+                    </div>
+                <% }); %>
+
+                <!-- Review Form -->
+                <% if(req.me) {%>
+                <form action="/review/create" method="POST">
+                    <textarea name="value" placeholder="Write your review here"></textarea>
+                    <input type="hidden" name="productId" value="<%= product.id %>">
+                    <button type="submit">Submit Review</button>
+                </form>
+                <% } %>
             </div>
+
+            <form action="/shoppingbasket/add/<%= product.id %>" method="POST">
+                <button type="submit" class="btn btn-primary">Add to Shopping Basket</button>
+            </form>
+
         </div>
     </div>
 </div>

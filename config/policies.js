@@ -26,10 +26,22 @@ module.exports.policies = {
   'view-admin': 'is-super-admin',
 
   ProductController: {
-    '*': ['is-super-admin', 'is-vendor']
+    '*':  'is-vendor',
+    find:true,
+    findOne: true
   },
 
   CategoryController: {
-    '*': ['is-super-admin', 'is-vendor']
+    '*': 'is-super-admin',
+    find: true
+  },
+
+  ShoppingBasketController: {
+    '*': true // This allows public access to all actions in the Shopping Basket Controller
+  },
+
+  ReviewController:{
+    '*':true
   }
+
 };

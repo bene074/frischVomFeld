@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>Benutzer</h1>
+
+  <div class="item-content">
+      <table class="table">
+          <thead>
+          <tr>
+              <th>Vorname</th>
+              <th>Nachname</th>
+              <th>Email Adresse</th>
+              <th>Aktionen</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% users.forEach(function(user){ %>
+              <tr>
+                  <td>
+                      <%= user.firstName %>
+                  </td>
+                  <td>
+                      <%= user.lastName %>
+                  </td>
+                  <td>
+                      <%= user.emailAddress %>
+                  </td>
+                  <td>
+                      <a class="green-button" href="/usermanagement/<%= user.id %>/destroy">Löschen</a>
+                  </td>
+              </tr>
+          <% }); %>
+          </tbody>
+      </table>
+
+  </div>
+</div>
