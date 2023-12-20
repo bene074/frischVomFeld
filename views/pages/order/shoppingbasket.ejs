@@ -17,10 +17,10 @@
     <p class="text-center" v-if="basket.length === 0">Der Warenkorb ist leider leer.</p>
 
     <div class="buttons">
-        <button class="btn btn-secondary" @click="clearBasket" v-if="basket.length > 0">Warenkorb leeren</button>
-        <button class="btn btn-primary" @click="placeOrder" v-if="basket.length > 0">Bestellen</button>
-        <a href="/product" class="btn btn-info" v-if="basket.length > 0">Weiter einkaufen</a>
-        <a href="/product" class="btn btn-info" v-if="basket.length === 0">Waren ansehen</a>
+        <button class="btn green-button" @click="clearBasket" v-if="basket.length > 0">Warenkorb leeren</button>
+        <button class="btn green-button" @click="placeOrder" v-if="basket.length > 0">Bestellen</button>
+        <a href="/product" class="btn green-button" v-if="basket.length > 0">Weiter einkaufen</a>
+        <a href="/product" class="btn green-button" v-if="basket.length === 0">Waren ansehen</a>
     </div>
 
 </div>
