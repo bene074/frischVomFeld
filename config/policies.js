@@ -24,6 +24,7 @@ module.exports.policies = {
   'account/logout': true,
   '/':true,
   'view-admin': 'is-super-admin',
+  'admin': 'is-super-admin',
 
   ProductController: {
     '*':  'is-vendor',
