@@ -23,6 +23,10 @@
         <a href="/product" class="btn green-button button-spacing" v-if="basket.length === 0">Waren ansehen</a>
     </div>
 
+    <p class="text-center" v-if="orderPlaced">Ware bestellt</p>
+
+
+
 </div>
 
 <script src="https://unpkg.com/vue@next"></script>
@@ -31,7 +35,8 @@
   createApp({
     data() {
       return {
-        basket: <%- JSON.stringify(initialBasket) %>
+        basket: <%- JSON.stringify(initialBasket) %>,
+        orderPlaced: false
       };
     },
     methods: {
@@ -53,6 +58,7 @@
         fetch('/shoppingbasket/order', { method: 'POST' })
           .then(() => {
             this.basket = [];
+            this.orderPlaced = true;
           })
           .catch(error => console.error('Error:', error));
       }
