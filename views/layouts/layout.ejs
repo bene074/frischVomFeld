@@ -103,49 +103,37 @@
               <form action="/product" method="get"  class="form-inline mr-2">
                   <input class="form-control d-none d-md-block" type="search" placeholder="Suchen" aria-label="Search" name="q">
               </form>
-              <button class="btn btn-outline-light mr-2">
-                <a href="/account">
-                 <i class="fas fa-user "></i>
-                </a>
-              </button>
-              <button class="btn btn-outline-light">
-                <a href="/shoppingbasket">
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
-              </button>
-          </div>
-            <!-- LOGGED-IN NAVIGATION -->
-      <% if(req.me) { %>
-        <!-- Added Block für Super user Navigation-->
-        <% if(req.me.isSuperAdmin) { %>
-          <div class="nav-item dropdown d-none d-sm-block">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Speisekarte</a>
-            <div style="left: auto; right: 0;" class="dropdown-menu" aria-labelledby="header-account-menu-link">
-              <a class="dropdown-item" href="/product">Produkte</a>
-              <a class="dropdown-item" href="/category">Kategorien</a>
-            </div>
-          </div>
-          <% } %>
-        <!-- Only in desktop nav -->
-        <% if(req.session.basket && req.session.basket.length> 0){ %>
-          <a class="nav-item nav-link" href="/shoppingbasket">Warenkorb</a></li>
-        <% } %>
-        <div class="nav-item dropdown d-none d-sm-block">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Account
-          </a>
-          <!--a class="nav-link dropdown-toggle" id="header-account-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a -->
-          <div style="left: auto; right: 0;" class="dropdown-menu" aria-labelledby="header-account-menu-link">
-            <a class="dropdown-item" href="/account">Settings</a>
-            <a class="dropdown-item" href="/logout">Sign out</a>
-          </div>
-        </div>
-        <% } else { %>
-            <div class="form-inline d-none ml-2 d-md-block" >
+              <% if(req.me) { %>
+                <% if(!req.me.isSuperAdmin) { %>
+                    <!-- User-Icon für Kunden und Vendors -->
+                    <button class="btn btn-outline-light mr-2">
+                        <a href="/account">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </button>
+                <% } %>
+    
+                <% if(req.session.basket && req.session.basket.length > 0 && !req.me.isVendor) { %>
+                    <!-- Shopping-Cart-Icon nur für Kunden mit Inhalten im Warenkorb -->
+                    <button class="btn btn-outline-light">
+                        <a href="/shoppingbasket">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    </button>
+                <% } %>
+    
+                <% if(req.me.isSuperAdmin) { %>
+                    <!-- Admin-Button nur für Admins -->
+                    <a class="btn btn-outline-info d-none d-md-block" href="/admin">Admin</a>
+                    <% } %>
+                    <!-- Abmelden-Button für eingeloggte Benutzer -->
+                    <a class="btn btn-outline-info d-none d-md-block" href="/logout">Abmelden</a>
+            <% } else { %>
+                <!-- Anmelden-Button, wenn kein Benutzer angemeldet ist -->
                 <a class="btn btn-outline-info d-none d-md-block" href="/login">Anmelden</a>
-            </div>
-        <% } %>
+            <% } %>
+          </div>
+
       </div>
   </header>
 
