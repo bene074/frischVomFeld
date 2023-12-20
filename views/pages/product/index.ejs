@@ -33,8 +33,12 @@
                     <!-- Action Buttons for Larger Screens -->
                     <td class="product-actions d-none d-md-table-cell">
                         <a class="green-button" href="/product/<%= product.id %>">anzeigen</a>
+                        <% if(req.me) { %>
+                            <% if(req.me.isSuperAdmin) { %>
                         <a class="green-button" href="/product/<%= product.id %>/edit">ändern</a>
                         <a class="green-button" href="/product/<%= product.id %>/destroy">löschen</a>
+                        <% } %>
+                        <% } %>
                     </td>
                 </tr>
                 <!-- Action Buttons Row for Mobile Screens -->
@@ -61,11 +65,15 @@
                 <!-- For small screens, each button takes full width (col-12).
                      For medium screens and larger (col-md-6), buttons take half width. -->
                 <div class="col-12 col-md-6 mb-2">
+
                     <a class="green-add-button w-100" href="/addProduct">neues Produkt</a>
                 </div>
+                
+
                 <div class="col-12 col-md-6">
                     <a class="green-add-button w-100" href="/addCategory">neue Kategorie</a>
                 </div>
+
             </div>
         </div>
     </div>

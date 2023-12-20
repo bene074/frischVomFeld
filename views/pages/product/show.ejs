@@ -68,10 +68,11 @@
                     </div>
                 </div>
             <% } %>
-
+            <% if(req.me) { %>
             <form action="/shoppingbasket/add/<%= product.id %>" method="POST">
-                <button type="submit" class="btn btn-primary">Add to Shopping Basket</button>
+                <button type="submit" class="btn green-button">Zu Warenkorb hinzufügen</button>
             </form>
+            <% } %>
 
         </div>
     </div>
