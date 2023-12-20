@@ -3,7 +3,15 @@
         <img class="responsive-image" alt="fvfBanner" src="/images/fvfBanner.png"/>
     </div>
     <div class="button-row">
-        <a class="btn btn-primary cto-buttons-bottom" href="/product">Jetzt Bestellen</a>
+        <% if(!req.me) { %>
+            <!-- Wenn kein Nutzer angemeldet ist, führt der Button zur Login-Seite -->
+            <a class="btn btn-primary cto-buttons-bottom" href="/login">Jetzt bestellen</a>
+        <% } else if(!req.me.isVendor) { %>
+            <!-- Wenn ein normaler Nutzer angemeldet ist, führt der Button zur Produktseite -->
+            <a class="btn btn-primary cto-buttons-bottom" href="/product">Jetzt bestellen</a>
+        <% } %>
+        <!-- Kein Button wird angezeigt, wenn ein Vendor angemeldet ist -->
+    
     </div>
     <!--<div class="text-below-banner">
         Willkommen bei FrischVomFeld, Ihrer Online-Plattform für frische, lokal produzierte Lebensmittel direkt von den Erzeugern aus Ihrer Region. Entdecken Sie ein vielfältiges Angebot an frischen Produkten, von Obst und Gemüse bis hin zu Fleisch, Milchprodukten und handwerklichen Erzeugnissen. Unsere Mission ist es, eine direkte Verbindung zwischen lokalen Bauern, Lebensmittelproduzenten und Konsumenten herzustellen, um die lokale Wirtschaft zu fördern und Ihnen eine gesunde, nachhaltige und bequeme Einkaufsalternative zu bieten. Seien Sie Teil einer Bewegung, die sich für lokal produzierte Lebensmittel, nachhaltige Landwirtschaft und eine stärkere Verbindung zwischen Produzenten und Konsumenten einsetzt. Entdecken Sie die Vielfalt der lokalen Lebensmittelproduktion und genießen Sie die hochwertigen Produkte, die unsere Region zu bieten hat. Registrieren Sie sich jetzt, um den Geschmack von FrischVomFeld zu erleben!
@@ -25,31 +33,74 @@
           <span id="toggleLink" class="toggle-link">Mehr anzeigen</span>
         </p>
       </div>
-    <div class="button-grid">
+      <div class="button-grid">
+        <% if(req.me) { %>
         <div class="grid-item">
-            <button class="custom-button">
-                Obst<br>
-                <span class="slogan">Jetzt bestellen</span>
-            </button>
+            <a href="/product" class="custom-button-link">
+                <button class="custom-button">
+                    Obst<br>
+                    <span class="slogan">Jetzt bestellen</span>
+                </button>
+            </a>
         </div>
         <div class="grid-item">
-            <button class="custom-button">
-                Gemüse<br>
-                <span class="slogan">Jetzt bestellen</span>
-            </button>
+            <a href="/product" class="custom-button-link">
+                <button class="custom-button">
+                    Gemüse<br>
+                    <span class="slogan">Jetzt bestellen</span>
+                </button>
+            </a>
         </div>
         <div class="grid-item">
-            <button class="custom-button">
-                Milchprodukte<br>
-                <span class="slogan">Jetzt bestellen</span>
-            </button>
+            <a href="/product" class="custom-button-link">
+                <button class="custom-button">
+                    Milchprodukte<br>
+                    <span class="slogan">Jetzt bestellen</span>
+                </button>
+            </a>
         </div>
         <div class="grid-item">
-            <button class="custom-button">
-                Fleisch & Wurst<br>
-                <span class="slogan">Jetzt bestellen</span>
-            </button>
+            <a href="/product" class="custom-button-link">
+                <button class="custom-button">
+                    Fleisch & Wurst<br>
+                    <span class="slogan">Jetzt bestellen</span>
+                </button>
+            </a>
         </div>
+        <% } else { %>
+            <div class="grid-item">
+                <a href="/login" class="custom-button-link">
+                    <button class="custom-button">
+                        Obst<br>
+                        <span class="slogan">Jetzt bestellen</span>
+                    </button>
+                </a>
+            </div>
+            <div class="grid-item">
+                <a href="/login" class="custom-button-link">
+                    <button class="custom-button">
+                        Gemüse<br>
+                        <span class="slogan">Jetzt bestellen</span>
+                    </button>
+                </a>
+            </div>
+            <div class="grid-item">
+                <a href="/login" class="custom-button-link">
+                    <button class="custom-button">
+                        Milchprodukte<br>
+                        <span class="slogan">Jetzt bestellen</span>
+                    </button>
+                </a>
+            </div>
+            <div class="grid-item">
+                <a href="/login" class="custom-button-link">
+                    <button class="custom-button">
+                        Fleisch & Wurst<br>
+                        <span class="slogan">Jetzt bestellen</span>
+                    </button>
+                </a>
+            </div>
+        <% } %>
     </div>
     <div>
         <h2 class="product-header">Beliebte Produkte</h2>
@@ -69,7 +120,13 @@
         </div>
     </div>
     <div class="button-row">
-        <a href="/signup" class="cto-buttons-bottom">Anbieter werden</a>
+        <% if(req.me) { %>
+            <% if(req.me.isVendor) { %>
+                <a href="/product" class="cto-buttons-bottom">Produkte hinzufügen</a>
+            <% } %>
+        <% } else { %>
+            <a href="/signup" class="cto-buttons-bottom">Anbieter werden</a>
+        <% } %>
     </div>
 
 
