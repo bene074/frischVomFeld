@@ -34,10 +34,14 @@
                     <td class="product-actions d-none d-md-table-cell">
                         <a class="green-button" href="/product/<%= product.id %>">anzeigen</a>
                         <% if(req.me) { %>
-                            <% if(req.me.isSuperAdmin) { %>
-                        <a class="green-button" href="/product/<%= product.id %>/edit">ändern</a>
-                        <a class="green-button" href="/product/<%= product.id %>/destroy">löschen</a>
-                        <% } %>
+                            <!-- Zusätzliche Buttons für Vendors -->
+                            <% if(req.me.isVendor) { %>
+                                <a class="green-button" href="/product/<%= product.id %>/edit">ändern</a>
+                            <% } %>            
+                            <!-- 'löschen' Button für Admins und Vendors -->
+                            <% if(req.me.isSuperAdmin || req.me.isVendor) { %>
+                                <a class="green-button" href="/product/<%= product.id %>/destroy">löschen</a>
+                            <% } %>
                         <% } %>
                     </td>
                 </tr>
@@ -75,7 +79,7 @@
                         </div>
                     <% } %>
 
-            </div>
+            </div>  
         </div>
     </div>
 </div>
