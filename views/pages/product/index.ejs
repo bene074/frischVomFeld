@@ -65,14 +65,15 @@
                 <!-- For small screens, each button takes full width (col-12).
                      For medium screens and larger (col-md-6), buttons take half width. -->
                 <div class="col-12 col-md-6 mb-2">
-
-                    <a class="green-add-button w-100" href="/addProduct">neues Produkt</a>
-                </div>
-                
-
-                <div class="col-12 col-md-6">
-                    <a class="green-add-button w-100" href="/addCategory">neue Kategorie</a>
-                </div>
+                    <% if(req.me && req.me.isVendor) { %>
+                        <div class="col-12 mb-2">
+                            <a class="green-add-button w-100" href="/addProduct">neues Produkt</a>
+                        </div>
+                    <% } else if(req.me && req.me.isSuperAdmin) { %>
+                        <div class="col-12">
+                            <a class="green-add-button w-100" href="/addCategory">neue Kategorie</a>
+                        </div>
+                    <% } %>
 
             </div>
         </div>
