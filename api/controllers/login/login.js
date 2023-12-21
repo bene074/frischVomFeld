@@ -60,9 +60,11 @@ and exposed as \`req.me\`.)`
     },
 
     badCombo: {
-      description: `The provided email and password combination does not
-      match any user in the database.`,
-      responseType: 'forbidden'
+
+    description: `The provided email and password combination does not
+     match any user in the database.`,
+    responseType: 'forbidden'
+
       // ^This uses the custom `unauthorized` response located in `api/responses/unauthorized.js`.
       // To customize the generic "unauthorized" response across this entire app, change that file
       // (see api/responses/unauthorized).
@@ -73,7 +75,6 @@ and exposed as \`req.me\`.)`
     }
 
   },
-
 
   fn: async function ({emailAddress, password, rememberMe}) {
     sails.log.info(rememberMe)
@@ -87,9 +88,9 @@ and exposed as \`req.me\`.)`
       emailAddress: emailAddress.toLowerCase(),
     });
 
-    // If there was no matching user, respond thru the "badCombo" exit.
-    if(!userRecord) {
-      throw 'badCombo';
+   // If there was no matching user, respond thru the "badCombo" exit.
+    if(!userRecord ) {
+    throw 'badCombo';
     }
 
     // If the password doesn't match, then also exit thru "badCombo".

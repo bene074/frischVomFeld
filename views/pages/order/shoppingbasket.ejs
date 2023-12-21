@@ -5,7 +5,7 @@
     <ul class="list-group mb-3">
         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(item, index) in basket" :key="index">
             <div>
-                <h5 class="my-0">{{ item.name }}</h5>
+                <h5 class="my-0">{{ item.name sav}}</h5>
                 <small class="text-muted">Preis: {{ item.price }}€</small>
             </div>
 
@@ -17,11 +17,17 @@
     <p class="text-center" v-if="basket.length === 0">Der Warenkorb ist leider leer.</p>
 
     <div class="buttons">
-        <button class="btn btn-secondary" @click="clearBasket" v-if="basket.length > 0">Warenkorb leeren</button>
-        <button class="btn btn-primary" @click="placeOrder" v-if="basket.length > 0">Bestellen</button>
-        <a href="/product" class="btn btn-info" v-if="basket.length > 0">Weiter einkaufen</a>
-        <a href="/product" class="btn btn-info" v-if="basket.length === 0">Waren ansehen</a>
+        <button class="btn green-button button-spacing" @click="clearBasket" v-if="basket.length > 0">Warenkorb leeren</button>
+        <button class="btn green-button button-spacing" @click="placeOrder" v-if="basket.length > 0">Bestellen</button>
+        <a href="/product" class="btn green-button button-spacing" v-if="basket.length > 0">Weiter einkaufen</a>
+        <a href="/product" class="btn green-button button-spacing" v-if="basket.length === 0">Waren ansehen</a>
+        <a href="/order" class="btn green-button button-spacing" >getätigte Bestellungen</a>
+
     </div>
+
+    <p class="text-center" v-if="orderPlaced">Ware bestellt</p>
+
+
 
 </div>
 
@@ -31,7 +37,8 @@
   createApp({
     data() {
       return {
-        basket: <%- JSON.stringify(initialBasket) %>
+        basket: <%- JSON.stringify(initialBasket) %>,
+        orderPlaced: false
       };
     },
     methods: {
@@ -53,6 +60,7 @@
         fetch('/shoppingbasket/order', { method: 'POST' })
           .then(() => {
             this.basket = [];
+            this.orderPlaced = true;
           })
           .catch(error => console.error('Error:', error));
       }

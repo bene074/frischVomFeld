@@ -4,13 +4,16 @@
     <div class="item-content">
         <div class="form-group">
             <label for="filterDropdown"></label>
-            <select class="form-control" id="filterDropdown" onchange="location = '/product?categoryId=' + this.value;">
+            <select class="form-control" id="filterDropdown" onchange="handleCategoryChange(this.value)">
                 <option value="all" <%= selectedCategoryId === 'all' ? 'selected' : '' %>>Alle Produkte</option>
                 <% categories.forEach(function(category) { %>
                     <option value="<%= category.id %>" <%= selectedCategoryId.toString() === category.id.toString() ? 'selected' : '' %>><%= category.name %></option>
                 <% }); %>
             </select>
+            <button id="clearSearchBtn" class="btn btn-warning" style="display: none; margin: 10px">Suche löschen</button>
         </div>
+
+
 
         <table class="table">
             <thead>
@@ -33,8 +36,16 @@
                     <!-- Action Buttons for Larger Screens -->
                     <td class="product-actions d-none d-md-table-cell">
                         <a class="green-button" href="/product/<%= product.id %>">anzeigen</a>
-                        <a class="green-button" href="/product/<%= product.id %>/edit">ändern</a>
-                        <a class="green-button" href="/product/<%= product.id %>/destroy">löschen</a>
+                        <% if(req.me) { %>
+                            <!-- Zusätzliche Buttons für Vendors -->
+                            <% if(req.me.isVendor) { %>
+                                <a class="green-button" href="/product/<%= product.id %>/edit">ändern</a>
+                            <% } %>
+                            <!-- 'löschen' Button für Admins und Vendors -->
+                            <% if(req.me.isSuperAdmin || req.me.isVendor) { %>
+                                <a class="green-button" href="/product/<%= product.id %>/destroy">löschen</a>
+                            <% } %>
+                        <% } %>
                     </td>
                 </tr>
                 <!-- Action Buttons Row for Mobile Screens -->
@@ -45,11 +56,19 @@
                                 <a class="green-button" href="/product/<%= product.id %>">anzeigen</a>
                             </div>
                             <div class="col-4">
+                                <% if(req.me) { %>
+                                <% if(req.me.isVendor) { %>
                                 <a class="green-button" href="/product/<%= product.id %>/edit">ändern</a>
+                                <% } %>
                             </div>
+
                             <div class="col-4">
+                                <% if(req.me.isSuperAdmin || req.me.isVendor) { %>
                                 <a class="green-button" href="/product/<%= product.id %>/destroy">löschen</a>
+                                <% } %>
+                            <% } %>
                             </div>
+
                         </div>
                     </td>
                 </tr>
@@ -61,12 +80,44 @@
                 <!-- For small screens, each button takes full width (col-12).
                      For medium screens and larger (col-md-6), buttons take half width. -->
                 <div class="col-12 col-md-6 mb-2">
-                    <a class="green-add-button w-100" href="/addProduct">neues Produkt</a>
-                </div>
-                <div class="col-12 col-md-6">
-                    <a class="green-add-button w-100" href="/addCategory">neue Kategorie</a>
+                    <% if(req.me && req.me.isVendor) { %>
+                        <div class="col-12 mb-2">
+                            <a class="green-add-button w-100" href="/addProduct">neues Produkt</a>
+                        </div>
+                    <% } else if(req.me && req.me.isSuperAdmin) { %>
+                        <div class="col-12">
+                            <a class="green-add-button w-100" href="/addCategory">neue Kategorie</a>
+                        </div>
+                    <% } %>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var query = urlParams.get('q');
+    var categoryId = urlParams.get('categoryId');
+
+    var clearSearchBtn = document.getElementById('clearSearchBtn');
+
+    // Show the button if there is a query or categoryId
+    if (query || (categoryId && categoryId !== 'all')) {
+      clearSearchBtn.style.display = 'block';
+    }
+
+    // Add event listener to the button
+    clearSearchBtn.addEventListener('click', function() {
+      window.location.href = '/product'; // Redirect to products page without filters
+    });
+  });
+  function handleCategoryChange(selectedCategoryId) {
+    var currentSearchQuery = '<%= req.query.q || '' %>';
+    location = '/product?categoryId=' + selectedCategoryId + '&q=' + encodeURIComponent(currentSearchQuery);
+  }
+
+</script>
+

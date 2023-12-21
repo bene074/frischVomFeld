@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="/styles/pages/category/index.css">
     <link rel="stylesheet" href="/styles/pages/product/index.css">
     <link rel="stylesheet" href="/styles/pages/product/show.css">
+    <link rel="stylesheet" href="/styles/pages/shoppingbasket/index.css">
     <!--STYLES END-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
@@ -82,70 +83,86 @@
     <script src="/js/pages/produkte.page.js"></script>
     <script src="/js/pages/shoppingbasket/index.page.js"></script>
     <!--SCRIPTS END-->
-  <header class="navbar navbar-expand-sm navbar-dark bg-dark  flex-md-row justify-content-between" purpose="page-header">
-      <div class="navbar-nav flex-row">
-          <a class="nav-item nav-link d-none d-md-block" href="/">Home</a>
+    <header class="navbar navbar-expand-sm navbar-dark bg-dark" purpose="page-header">
+        <div class="container-fluid">
+            <div class="navbar-nav flex-row">
+                <a class="nav-item nav-link d-none d-md-block" href="/">Home</a>
 
 
-          <a class="nav-item nav-link d-none d-md-block" href="/product">Produkte</a>
-          <a class="nav-item nav-link d-block d-md-none mr-2">
-              <i class="bi bi-list icons-margin burger-size"></i>
-          </a>
+                <a class="nav-item nav-link d-none d-md-block" href="/product">Produkte</a>
 
-      </div>
-      <img class="fixed-logo"  alt="frischVomFeld logo" src="../images/FvFLogo-removebg.png" onclick="window.location.href='/'"/>
-
-
-      <div class="navbar-nav flex-row">
-
-          <div class="d-flex justify-content-end">
-              <form action="/product" method="get"  class="form-inline mr-2">
-                  <input class="form-control d-none d-md-block" type="search" placeholder="Suchen" aria-label="Search" name="q">
-              </form>
-              <button class="btn btn-outline-light mr-2">
-                <a href="/account">
-                 <i class="fas fa-user "></i>
-                </a>
-              </button>
-              <button class="btn btn-outline-light">
-                <a href="/shoppingbasket">
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
-              </button>
-          </div>
-            <!-- LOGGED-IN NAVIGATION -->
-      <% if(req.me) { %>
-        <!-- Added Block für Super user Navigation-->
-        <% if(req.me.isSuperAdmin) { %>
-          <div class="nav-item dropdown d-none d-sm-block">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Speisekarte</a>
-            <div style="left: auto; right: 0;" class="dropdown-menu" aria-labelledby="header-account-menu-link">
-              <a class="dropdown-item" href="/product">Produkte</a>
-              <a class="dropdown-item" href="/category">Kategorien</a>
             </div>
-          </div>
-          <% } %>
-        <!-- Only in desktop nav -->
-        <% if(req.session.basket && req.session.basket.length> 0){ %>
-          <a class="nav-item nav-link" href="/shoppingbasket">Warenkorb</a></li>
-        <% } %>
-        <div class="nav-item dropdown d-none d-sm-block">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Account
-          </a>
-          <!--a class="nav-link dropdown-toggle" id="header-account-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a -->
-          <div style="left: auto; right: 0;" class="dropdown-menu" aria-labelledby="header-account-menu-link">
-            <a class="dropdown-item" href="/account">Settings</a>
-            <a class="dropdown-item" href="/logout">Sign out</a>
-          </div>
+            <div class="navbar-brand mx-auto mx-md-0">
+                <img class="fixed-logo" alt="frischVomFeld logo" src="../images/FvFLogo-removebg.png" onclick="window.location.href='/'"/>
+            </div>
+
+
+            <div class="d-md-none d-flex flex-column align-items-center mt-3">
+                <a class="nav-item nav-link" href="/">Home</a>
+                <a class="nav-item nav-link" href="/product">Produkte</a>
+                <% if(req.me) { %>
+                    <% if(!req.me.isSuperAdmin) { %>
+                        <a href="/account" class="btn btn-outline-light my-2">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    <% } %>
+                    <% if(req.session.basket && req.session.basket.length > 0 && !req.me.isVendor) { %>
+                        <a href="/shoppingbasket" class="btn btn-outline-light my-2">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    <% } %>
+                    <% if(req.me.isSuperAdmin) { %>
+                        <a class="btn btn-outline-info my-2" href="/admin">Admin</a>
+                    <% } %>
+                    <a class="btn btn-outline-info my-2" href="/logout">Abmelden</a>
+                <% } else { %>
+                    <a class="btn btn-outline-info my-2" href="/login">Anmelden</a>
+                <% } %>
+            </div>
+
+
+            <div class="navbar-nav flex-row">
+
+                <div class="d-flex justify-content-end">
+                    <form action="/product" method="get" class="form-inline mr-2">
+                        <input type="hidden" name="categoryId" id="hiddenCategoryId">
+                        <input class="form-control d-none d-md-block" type="search" placeholder="Suchen" aria-label="Search" name="q">
+                    </form>
+
+                    <% if(req.me) { %>
+                        <% if(!req.me.isSuperAdmin) { %>
+                            <!-- User-Icon für Kunden und Vendors -->
+                            <a href="/account">
+                                <button class="btn btn-outline-light mr-2">
+                                    <i class="fas fa-user"></i>
+                                </button>
+                            </a>
+                        <% } %>
+
+                        <% if(req.session.basket && req.session.basket.length > 0 && !req.me.isVendor) { %>
+                            <!-- Shopping-Cart-Icon nur für Kunden mit Inhalten im Warenkorb -->
+                            <a href="/shoppingbasket">
+                                <button class="btn btn-outline-light mr-2">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </a>
+                        <% } %>
+
+                        <% if(req.me.isSuperAdmin) { %>
+                            <!-- Admin-Button nur für Admins -->
+                            <a class="btn btn-outline-info d-none d-md-block mr-2" href="/admin">Admin</a>
+                        <% } %>
+                        <!-- Abmelden-Button für eingeloggte Benutzer -->
+                        <a class="btn btn-outline-info d-none d-md-block" href="/logout">Abmelden</a>
+                    <% } else { %>
+                        <!-- Anmelden-Button, wenn kein Benutzer angemeldet ist -->
+                        <a class="btn btn-outline-info d-none d-md-block" href="/login">Anmelden</a>
+                    <% } %>
+                </div>
+
+            </div>
         </div>
-        <% } else { %>
-            <div class="form-inline d-none ml-2 d-md-block" >
-                <a class="btn btn-outline-info d-none d-md-block" href="/signup">Anmelden</a>
-            </div>
-        <% } %>
-      </div>
+
   </header>
 
   <%- body %>
@@ -259,6 +276,12 @@
 
     -->
 
-    
+
   </body>
 </html>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    document.getElementById('hiddenCategoryId').value = urlParams.get('categoryId') || 'all';
+  });
+</script>

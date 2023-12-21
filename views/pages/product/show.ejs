@@ -1,10 +1,8 @@
-<div class="container">
     <div class="card mt-4">
         <h4 class="card-header">
             Produkt Details
         </h4>
         <div>
-            <!-- Each section is a row, and content is divided into columns -->
             <!-- Name -->
             <div class="row">
                 <div class="col-md-4 col-12 attribute-label"> <!-- Labels are full width on small screens -->
@@ -68,6 +66,11 @@
                     </div>
                 </div>
             <% } %>
+            <% if(req.me && !req.me.isSuperAdmin && !req.me.isVendor) { %>
+                <form action="/shoppingbasket/add/<%= product.id %>" method="POST">
+                    <button type="submit" class="btn green-button">Zu Warenkorb hinzufügen</button>
+                </form>
+            <% } %>
 
             <div class="reviews-section">
                 <h4>Product Reviews</h4>
@@ -93,10 +96,5 @@
                 <% } %>
             </div>
 
-            <form action="/shoppingbasket/add/<%= product.id %>" method="POST">
-                <button type="submit" class="btn btn-primary">Add to Shopping Basket</button>
-            </form>
-
         </div>
     </div>
-</div>

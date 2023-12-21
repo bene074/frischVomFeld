@@ -1,19 +1,24 @@
 .fixed-logo {
-  min-height: 20%;
+  min-height: 30%;
   min-width: 18%;
   cursor: pointer;
   display: block; /* Makes the image a block-level element to react to width and height properly */
-  margin: 0 auto; /* Center the image if needed */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 768px) {
+  .navbar-brand {
+    flex-grow: 1; /* Allow the brand/logo to grow and push other elements */
+  }
   .hide-on-small {
     display: none;
   }
   .fixed-logo {
     min-height: 60%;
     width: 55%; /* adjust as needed */
-    margin-left: 0;
+    margin-left: auto;
+    margin-right: auto;
   }
   .icons-margin{
     margin: 3px;
