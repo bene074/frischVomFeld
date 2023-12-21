@@ -66,10 +66,10 @@
                     </div>
                 </div>
             <% } %>
-            <% if(req.me) { %>
-            <form action="/shoppingbasket/add/<%= product.id %>" method="POST">
-                <button type="submit" class="btn green-button">Zu Warenkorb hinzufügen</button>
-            </form>
+            <% if(req.me && !req.me.isSuperAdmin && !req.me.isVendor) { %>
+                <form action="/shoppingbasket/add/<%= product.id %>" method="POST">
+                    <button type="submit" class="btn green-button">Zu Warenkorb hinzufügen</button>
+                </form>
             <% } %>
 
         </div>
