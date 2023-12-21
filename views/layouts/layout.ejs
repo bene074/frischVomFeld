@@ -83,60 +83,86 @@
     <script src="/js/pages/produkte.page.js"></script>
     <script src="/js/pages/shoppingbasket/index.page.js"></script>
     <!--SCRIPTS END-->
-  <header class="navbar navbar-expand-sm navbar-dark bg-dark  flex-md-row justify-content-between" purpose="page-header">
-      <div class="navbar-nav flex-row">
-          <a class="nav-item nav-link d-none d-md-block" href="/">Home</a>
+    <header class="navbar navbar-expand-sm navbar-dark bg-dark" purpose="page-header">
+        <div class="container-fluid">
+            <div class="navbar-nav flex-row">
+                <a class="nav-item nav-link d-none d-md-block" href="/">Home</a>
 
 
-          <a class="nav-item nav-link d-none d-md-block" href="/product">Produkte</a>
-          <a class="nav-item nav-link d-block d-md-none mr-2">
-              <i class="bi bi-list icons-margin burger-size"></i>
-          </a>
+                <a class="nav-item nav-link d-none d-md-block" href="/product">Produkte</a>
 
-      </div>
-      <img class="fixed-logo"  alt="frischVomFeld logo" src="../images/FvFLogo-removebg.png" onclick="window.location.href='/'"/>
+            </div>
+            <div class="navbar-brand mx-auto mx-md-0">
+                <img class="fixed-logo" alt="frischVomFeld logo" src="../images/FvFLogo-removebg.png" onclick="window.location.href='/'"/>
+            </div>
 
 
-      <div class="navbar-nav flex-row">
-
-          <div class="d-flex justify-content-end">
-              <form action="/product" method="get" class="form-inline mr-2">
-                  <input type="hidden" name="categoryId" id="hiddenCategoryId">
-                  <input class="form-control d-none d-md-block" type="search" placeholder="Suchen" aria-label="Search" name="q">
-              </form>
-
-          <% if(req.me) { %>
-                <% if(!req.me.isSuperAdmin) { %>
-                    <!-- User-Icon für Kunden und Vendors -->
-                        <a href="/account">
-                          <button class="btn btn-outline-light mr-2">
+            <div class="d-md-none d-flex flex-column align-items-center mt-3">
+                <a class="nav-item nav-link" href="/">Home</a>
+                <a class="nav-item nav-link" href="/product">Produkte</a>
+                <% if(req.me) { %>
+                    <% if(!req.me.isSuperAdmin) { %>
+                        <a href="/account" class="btn btn-outline-light my-2">
                             <i class="fas fa-user"></i>
-                          </button>
                         </a>
-                <% } %>
-
-                <% if(req.session.basket && req.session.basket.length > 0 && !req.me.isVendor) { %>
-                    <!-- Shopping-Cart-Icon nur für Kunden mit Inhalten im Warenkorb -->
-                        <a href="/shoppingbasket">
-                          <button class="btn btn-outline-light mr-2">
-                            <i class="fas fa-shopping-cart"></i>
-                          </button>
-                          </a>
-                <% } %>
-
-                <% if(req.me.isSuperAdmin) { %>
-                    <!-- Admin-Button nur für Admins -->
-                    <a class="btn btn-outline-info d-none d-md-block mr-2" href="/admin">Admin</a>
                     <% } %>
-                    <!-- Abmelden-Button für eingeloggte Benutzer -->
-                    <a class="btn btn-outline-info d-none d-md-block" href="/logout">Abmelden</a>
-            <% } else { %>
-                <!-- Anmelden-Button, wenn kein Benutzer angemeldet ist -->
-                <a class="btn btn-outline-info d-none d-md-block" href="/login">Anmelden</a>
-            <% } %>
-          </div>
+                    <% if(req.session.basket && req.session.basket.length > 0 && !req.me.isVendor) { %>
+                        <a href="/shoppingbasket" class="btn btn-outline-light my-2">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    <% } %>
+                    <% if(req.me.isSuperAdmin) { %>
+                        <a class="btn btn-outline-info my-2" href="/admin">Admin</a>
+                    <% } %>
+                    <a class="btn btn-outline-info my-2" href="/logout">Abmelden</a>
+                <% } else { %>
+                    <a class="btn btn-outline-info my-2" href="/login">Anmelden</a>
+                <% } %>
+            </div>
 
-      </div>
+
+            <div class="navbar-nav flex-row">
+
+                <div class="d-flex justify-content-end">
+                    <form action="/product" method="get" class="form-inline mr-2">
+                        <input type="hidden" name="categoryId" id="hiddenCategoryId">
+                        <input class="form-control d-none d-md-block" type="search" placeholder="Suchen" aria-label="Search" name="q">
+                    </form>
+
+                    <% if(req.me) { %>
+                        <% if(!req.me.isSuperAdmin) { %>
+                            <!-- User-Icon für Kunden und Vendors -->
+                            <a href="/account">
+                                <button class="btn btn-outline-light mr-2">
+                                    <i class="fas fa-user"></i>
+                                </button>
+                            </a>
+                        <% } %>
+
+                        <% if(req.session.basket && req.session.basket.length > 0 && !req.me.isVendor) { %>
+                            <!-- Shopping-Cart-Icon nur für Kunden mit Inhalten im Warenkorb -->
+                            <a href="/shoppingbasket">
+                                <button class="btn btn-outline-light mr-2">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </a>
+                        <% } %>
+
+                        <% if(req.me.isSuperAdmin) { %>
+                            <!-- Admin-Button nur für Admins -->
+                            <a class="btn btn-outline-info d-none d-md-block mr-2" href="/admin">Admin</a>
+                        <% } %>
+                        <!-- Abmelden-Button für eingeloggte Benutzer -->
+                        <a class="btn btn-outline-info d-none d-md-block" href="/logout">Abmelden</a>
+                    <% } else { %>
+                        <!-- Anmelden-Button, wenn kein Benutzer angemeldet ist -->
+                        <a class="btn btn-outline-info d-none d-md-block" href="/login">Anmelden</a>
+                    <% } %>
+                </div>
+
+            </div>
+        </div>
+
   </header>
 
   <%- body %>
