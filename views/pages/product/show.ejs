@@ -72,7 +72,33 @@
                 </form>
             <% } %>
 
+            <div class="reviews-section">
+                <h4>Product Reviews</h4>
+                <% reviews.forEach(function(review) { %>
+                    <div class="review">
+                        <p><%= review.value %></p>
+                        <p>Reviewed by: <%= review.user.firstName %></p>
+                        <%if (review.user.id === req.me?.id) { %>
+                            <form action="/review/delete/<%= review.id %>" method="POST">
+                                <button type="submit">Delete Review</button>
+                            </form>
+                        <% } %>
+                    </div>
+                <% }); %>
+
+                <!-- Review Form -->
+                <% if(req.me) {%>
+                <form action="/review/create" method="POST">
+                    <textarea name="value" placeholder="Write your review here"></textarea>
+                    <input type="hidden" name="productId" value="<%= product.id %>">
+                    <button type="submit">Submit Review</button>
+                </form>
+                <% } %>
+            </div>
+
+            <form action="/shoppingbasket/add/<%= product.id %>" method="POST">
+                <button type="submit" class="btn btn-primary">Add to Shopping Basket</button>
+            </form>
+
         </div>
     </div>
-
-
