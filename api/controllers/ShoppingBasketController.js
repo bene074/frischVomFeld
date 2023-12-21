@@ -42,10 +42,32 @@ module.exports = {
       return res.ok();
     },
 
-    order: async function (req, res) {
-      // Add order logic here
-      req.session.basket = []; // For now, just clearing the basket
-      return res.ok();
-    },
+  // api/controllers/ShoppingBasketController.js
+  order: async function (req, res) {
+    try {
+      const basket = req.session.basket;
+
+      if (!basket || basket.length === 0) {
+        return res.badRequest('Basket is empty.');
+      }
+
+      // Create an order for each item in the basket
+      const orders = await Promise.all(basket.map(async (item) => {
+        return await Order.create({
+          user: req.session.userId,
+          product: item.id
+        }).fetch();
+      }));
+
+      // Clear the basket
+      req.session.basket = [];
+
+      return res.ok(orders);
+    } catch (error) {
+      sails.log.error('Error creating orders:', error);
+      return res.serverError('Error occurred while creating orders.');
+    }
+  },
+
 };
 
