@@ -28,6 +28,7 @@ module.exports.policies = {
 
   ProductController: {
     '*':  'is-vendor',
+    destroy: 'is-super-admin',
     find:true,
     findOne: true
   },
