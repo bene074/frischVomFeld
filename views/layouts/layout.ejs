@@ -101,7 +101,7 @@
 
           <div class="d-flex justify-content-end">
               <form action="/product" method="get" class="form-inline mr-2">
-                  <input type="hidden" name="categoryId" value="<%= selectedCategoryId || 'all' %>">
+                  <input type="hidden" name="categoryId" id="hiddenCategoryId">
                   <input class="form-control d-none d-md-block" type="search" placeholder="Suchen" aria-label="Search" name="q">
               </form>
 
@@ -111,7 +111,7 @@
                         <a href="/account">
                           <button class="btn btn-outline-light mr-2">
                             <i class="fas fa-user"></i>
-                          </button>  
+                          </button>
                         </a>
                 <% } %>
 
@@ -253,3 +253,9 @@
 
   </body>
 </html>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    document.getElementById('hiddenCategoryId').value = urlParams.get('categoryId') || 'all';
+  });
+</script>

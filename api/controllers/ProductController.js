@@ -48,7 +48,7 @@ module.exports = {
       let categories = await Category.find();
       sails.log.debug(selectedCategoryId)
       // Pass both products and categories to the view
-      res.view('pages/product/index', { products: products, categories: categories, selectedCategoryId: selectedCategoryId });
+      res.view('pages/product/index', { products: products, categories: categories, selectedCategoryId: selectedCategoryId, currentSearchQuery: req.query.q || '' });
     } catch (error) {
       sails.log.error('Error fetching products:', error);
       return res.serverError('Error occurred while fetching products.');

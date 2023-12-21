@@ -4,13 +4,16 @@
     <div class="item-content">
         <div class="form-group">
             <label for="filterDropdown"></label>
-            <select class="form-control" id="filterDropdown" onchange="location = '/product?categoryId=' + this.value;">
+            <select class="form-control" id="filterDropdown" onchange="handleCategoryChange(this.value)">
                 <option value="all" <%= selectedCategoryId === 'all' ? 'selected' : '' %>>Alle Produkte</option>
                 <% categories.forEach(function(category) { %>
                     <option value="<%= category.id %>" <%= selectedCategoryId.toString() === category.id.toString() ? 'selected' : '' %>><%= category.name %></option>
                 <% }); %>
             </select>
+            <button id="clearSearchBtn" class="btn btn-warning" style="display: none; margin: 10px">Suche löschen</button>
         </div>
+
+
 
         <table class="table">
             <thead>
@@ -37,7 +40,7 @@
                             <!-- Zusätzliche Buttons für Vendors -->
                             <% if(req.me.isVendor) { %>
                                 <a class="green-button" href="/product/<%= product.id %>/edit">ändern</a>
-                            <% } %>            
+                            <% } %>
                             <!-- 'löschen' Button für Admins und Vendors -->
                             <% if(req.me.isSuperAdmin || req.me.isVendor) { %>
                                 <a class="green-button" href="/product/<%= product.id %>/destroy">löschen</a>
@@ -56,16 +59,16 @@
                                 <% if(req.me) { %>
                                 <% if(req.me.isVendor) { %>
                                 <a class="green-button" href="/product/<%= product.id %>/edit">ändern</a>
-                                <% } %>  
+                                <% } %>
                             </div>
-                            
+
                             <div class="col-4">
                                 <% if(req.me.isSuperAdmin || req.me.isVendor) { %>
                                 <a class="green-button" href="/product/<%= product.id %>/destroy">löschen</a>
                                 <% } %>
                             <% } %>
                             </div>
-                            
+
                         </div>
                     </td>
                 </tr>
@@ -87,9 +90,34 @@
                         </div>
                     <% } %>
 
-                </div>  
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var query = urlParams.get('q');
+    var categoryId = urlParams.get('categoryId');
+
+    var clearSearchBtn = document.getElementById('clearSearchBtn');
+
+    // Show the button if there is a query or categoryId
+    if (query || (categoryId && categoryId !== 'all')) {
+      clearSearchBtn.style.display = 'block';
+    }
+
+    // Add event listener to the button
+    clearSearchBtn.addEventListener('click', function() {
+      window.location.href = '/product'; // Redirect to products page without filters
+    });
+  });
+  function handleCategoryChange(selectedCategoryId) {
+    var currentSearchQuery = '<%= req.query.q || '' %>';
+    location = '/product?categoryId=' + selectedCategoryId + '&q=' + encodeURIComponent(currentSearchQuery);
+  }
+
+</script>
+
