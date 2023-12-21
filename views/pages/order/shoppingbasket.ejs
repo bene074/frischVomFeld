@@ -21,6 +21,8 @@
         <button class="btn green-button button-spacing" @click="placeOrder" v-if="basket.length > 0">Bestellen</button>
         <a href="/product" class="btn green-button button-spacing" v-if="basket.length > 0">Weiter einkaufen</a>
         <a href="/product" class="btn green-button button-spacing" v-if="basket.length === 0">Waren ansehen</a>
+        <a href="/order" class="btn green-button button-spacing" >getätigte Bestellungen</a>
+
     </div>
 
     <p class="text-center" v-if="orderPlaced">Ware bestellt</p>

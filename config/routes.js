@@ -59,6 +59,7 @@ module.exports.routes = {
   'GET /usermanagement': { controller: 'UsermanagementController', action: 'find' },
   'GET /usermanagement/:id/destroy': { controller: 'UsermanagementController', action: 'destroyOne' },
 
+  'GET /order': 'OrderController.findUserOrders',
 
 
 
