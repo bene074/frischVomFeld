@@ -53,11 +53,19 @@
                                 <a class="green-button" href="/product/<%= product.id %>">anzeigen</a>
                             </div>
                             <div class="col-4">
+                                <% if(req.me) { %>
+                                <% if(req.me.isVendor) { %>
                                 <a class="green-button" href="/product/<%= product.id %>/edit">ändern</a>
+                                <% } %>  
                             </div>
+                            
                             <div class="col-4">
+                                <% if(req.me.isSuperAdmin || req.me.isVendor) { %>
                                 <a class="green-button" href="/product/<%= product.id %>/destroy">löschen</a>
+                                <% } %>
+                            <% } %>
                             </div>
+                            
                         </div>
                     </td>
                 </tr>
