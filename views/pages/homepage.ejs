@@ -1,7 +1,19 @@
 <div id="homepage">
-    <div >
-        <img class="responsive-image" alt="fvfBanner" src="/images/fvfBanner.png"/>
+    <div>
+        <img 
+            srcset="/images/fvfBanner_320.png 320w,
+                    /images/fvfBanner_640.png 640w,
+                    /images/fvfBanner_1024.png 1024w"
+            sizes="(max-width: 320px) 320px,
+                   (max-width: 640px) 640px,
+                   (max-width: 1024px) 1024px"
+            src="/images/fvfBanner_640.png"
+            alt="fvfBanner"
+            class="responsive-image"/>
     </div>
+  <!--  <div >
+        <img class="responsive-image" alt="fvfBanner" src="/images/fvfBanner.png"/>
+    </div> -->
     <div class="button-row">
         <% if(!req.me) { %>
             <!-- Wenn kein Nutzer angemeldet ist, führt der Button zur Login-Seite -->
