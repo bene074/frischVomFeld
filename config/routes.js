@@ -24,6 +24,11 @@ module.exports.routes = {
   'GET /login':                          { action: 'login/view-login' },
   'GET /signup':                         { action: 'login/view-signup' },
 
+  'GET /imprint':                         { action: 'legal/view-imprint' },
+  'GET /dataprotection':                  { action: 'legal/view-dataprotection' },
+  'GET /agb':                             { action: 'legal/view-agb' },
+  'GET /contact':                         { action: 'legal/view-contact' },
+
   'GET /logout':                         { action: 'account/logout' },
   'POST  /login':                        { action: 'login/login' },
   'POST  /signup':                       { action: 'login/signup' },
