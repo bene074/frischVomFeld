@@ -7,40 +7,45 @@
       <form action="/signup" method="POST">
         <div class="form-group">
           <label for="first-name">Vorname</label>
-          <input class="form-control" id="firstName" name="firstName" type="text"  placeholder="Max " autocomplete="firstName" focus-first>
+          <input class="form-control" id="firstName" name="firstName" type="text"  required placeholder="Max " autocomplete="firstName" focus-first>
           <div class="invalid-feedback">Bitte geben Sie Ihren Vornamen ein.</div>
         </div>
         <div class="form-group">
           <label for="last-name">Nachname</label>
-          <input class="form-control" id="lastName" name="lastName" type="text"  placeholder="Mustermann" autocomplete="lastName">
+          <input class="form-control" id="lastName" name="lastName" type="text"  required placeholder="Mustermann" autocomplete="lastName">
           <div class="invalid-feedback">Bitte geben Sie Ihren Nachnamen ein.</div>
         </div>
         <div class="form-group">
           <label for="email-address">E-Mail Adresse</label>
-          <input class="form-control" id="email-address" name="emailAddress" type="email"  placeholder="Mustermann@example.com" autocomplete="email">
+          <input class="form-control" id="email-address" name="emailAddress" type="email"  required placeholder="Mustermann@example.com" autocomplete="email">
           <div class="invalid-feedback">Bitte geben Sie eine gültige E-Mail Adresse ein.</div>
         </div>
-        <div class="form-group">
+        <div class="form-group" id="app">
           <label for="password">Passwort</label>
-          <input class="form-control" id="password" name="password" type="password"  placeholder="••••••••" autocomplete="new-password">
+          <input class="form-control" id="password" name="password" type="password" v-model="password" @input="check" required placeholder="••••••••" autocomplete="new-password">
           <div class="invalid-feedback">Bitte gebe ein Passwort ein.</div>
+          <ul>
+            <li v-for="(criteria, index) in passwordCriteria" :key="index" :class="{ 'text-success': criteria.valid, 'text-danger': !criteria.valid }">
+                {{ criteria.message }}
+            </li>
+        </ul>
         </div>
         <div class="form-group">
           <label for="confirm-password">Passwort bestätigen</label>
-          <input class="form-control" id="confirm-password" name="confirmPassword" type="password"  placeholder="••••••••" autocomplete="new-password">
+          <input class="form-control" id="confirm-password" name="confirmPassword" type="password"  required placeholder="••••••••" autocomplete="new-password">
           <div class="invalid-feedback">Deine Passwörter stimmen nicht überein.</div>
         </div>
         <div class="form-group form-check">
-          <input class="form-check-input" id="terms-agreement" name="termsAgreement" type="checkbox" v-model="formData.agreed">
+          <input class="form-check-input" required id="terms-agreement" name="termsAgreement" type="checkbox" v-model="formData.agreed">
           <label for="terms-agreement" class="form-check-label">Ich habe die <a target="_blank" href="/terms">AGBs</a> gelesen und aktzeptiere diese.</label>
         </div>
         <div class="form-group form-check">
           <input class="form-check-input" id="is-vendor" name="isVendor" type="checkbox" v-model="formData.isVendor">
           <label for="is-vendor" class="form-check-label">Ich will einen Anbieter Account erstellen.</label>
         </div>
-        <span>It looks like there's already an account with your email address. If you forgot your password, you can recover it <a href="/account/password">here</a>.</span>
-        <div class="form-group">
-          <button type="submit" class="custom-button1">Account erstellen</button>
+     <!--   <span>Es sieht so aus, als gäbe es bereits ein Konto mit Ihrer E-Mail-Adresse. Wenn Sie Ihr Passwort vergessen haben, können Sie es  <a href="/account/password">hier</a> wiederherstellen.</span> -->
+        <div class="form-group" id="app">
+          <button  :disabled="!canRegister" type="submit" class="custom-button1" >Account erstellen</button>
         </div>
       </form>
       <p class="text-center">Du hast bereits einen Account? <a href="/login">Login</a></p>
@@ -48,3 +53,45 @@
   </div>
 </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
+
+<script>
+  const { createApp } = Vue
+  createApp({
+      data() {
+          return {
+              password: "",
+              canRegister: false,
+              passwordCriteria: [
+                  { valid: false, message: "Mindestens 8 Zeichen" },
+                  { valid: false, message: "Mindestens ein Großbuchstabe" },
+                  { valid: false, message: "Mindestens ein Kleinbuchstabe" },
+                  { valid: false, message: "Mindestens eine Zahl" },
+                  { valid: false, message: "Mindestens ein Sonderzeichen" },
+              ]
+          }
+      },
+      methods: {
+          check: function() {
+              this.passwordCriteria[0].valid = this.password.length >= 8;
+              this.passwordCriteria[1].valid = /[A-Z]/.test(this.password);
+              this.passwordCriteria[2].valid = /[a-z]/.test(this.password);
+              this.passwordCriteria[3].valid = /\d/.test(this.password);
+              this.passwordCriteria[4].valid = /[\W_]/.test(this.password);
+
+
+              this.canRegister = this.passwordCriteria.every(c => c.valid);
+          },
+          register: function() {
+            if (this.canRegister) {
+              // Überprüfen Sie hier zusätzlich, ob die anderen Formularfelder korrekt ausgefüllt sind
+              // und ob das bestätigte Passwort mit dem Passwort übereinstimmt
+              // Wenn ja, führen Sie die Registrierungslogik aus
+              alert("Registriert!");
+          } else {
+              // Fehlermeldung anzeigen, wenn die Passwortkriterien nicht erfüllt sind
+              alert("Bitte überprüfen Sie Ihre Eingaben!");
+          }
+          }
+      }
+  }).mount("#app")
+</script>
