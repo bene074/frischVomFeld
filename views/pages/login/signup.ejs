@@ -4,7 +4,7 @@
     <div style="max-width: 450px;" class="mx-auto" >
       <p class="text-center">Bestelle noch heute die besten Produkte .</p>
       <hr/>
-      <form action="/signup" method="POST">
+      <form action="/signup" id="signupForm" method="POST">
         <div class="form-group">
           <label for="first-name">Vorname</label>
           <input class="form-control" id="firstName" name="firstName" type="text"  required placeholder="Max " autocomplete="firstName" focus-first>
@@ -20,14 +20,15 @@
           <input class="form-control" id="email-address" name="emailAddress" type="email"  required placeholder="Mustermann@example.com" autocomplete="email">
           <div class="invalid-feedback">Bitte geben Sie eine gültige E-Mail Adresse ein.</div>
         </div>
-        <div class="form-group" id="app">
+        <div class="form-group">
           <label for="password">Passwort</label>
-          <input class="form-control" id="password" name="password" type="password" v-model="password" @input="check" required placeholder="••••••••" autocomplete="new-password">
+          <input class="form-control" id="password" name="password" type="password" required placeholder="••••••••" autocomplete="new-password">
           <div class="invalid-feedback">Bitte gebe ein Passwort ein.</div>
-          <ul>
-            <li v-for="(criteria, index) in passwordCriteria" :key="index" :class="{ 'text-success': criteria.valid, 'text-danger': !criteria.valid }">
-                {{ criteria.message }}
-            </li>
+          <ul id="passwordCriteria">
+            <li id="criteriaLengt">Mindestens 8 Zeichen</li>
+            <li id="criteriaUpper">Mindestens ein Großbuchstabe</li>
+            <li id="criteriaLower">Mindestens ein Kleinbuchstabe</li>
+            <li id="criteriaSpecial">Mindestens ein Sonderzeichen</li>
         </ul>
         </div>
         <div class="form-group">
@@ -44,8 +45,8 @@
           <label for="is-vendor" class="form-check-label">Ich will einen Anbieter Account erstellen.</label>
         </div>
      <!--   <span>Es sieht so aus, als gäbe es bereits ein Konto mit Ihrer E-Mail-Adresse. Wenn Sie Ihr Passwort vergessen haben, können Sie es  <a href="/account/password">hier</a> wiederherstellen.</span> -->
-        <div class="form-group" id="app">
-          <button  :disabled="!canRegister" type="submit" class="custom-button1" >Account erstellen</button>
+        <div class="form-group">
+          <button type="submit" id="submitBtn" class="custom-button1" >Account erstellen</button>
         </div>
       </form>
       <p class="text-center">Du hast bereits einen Account? <a href="/login">Login</a></p>
@@ -55,43 +56,62 @@
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
 
 <script>
-  const { createApp } = Vue
-  createApp({
-      data() {
-          return {
-              password: "",
-              canRegister: false,
-              passwordCriteria: [
-                  { valid: false, message: "Mindestens 8 Zeichen" },
-                  { valid: false, message: "Mindestens ein Großbuchstabe" },
-                  { valid: false, message: "Mindestens ein Kleinbuchstabe" },
-                  { valid: false, message: "Mindestens eine Zahl" },
-                  { valid: false, message: "Mindestens ein Sonderzeichen" },
-              ]
-          }
-      },
-      methods: {
-          check: function() {
-              this.passwordCriteria[0].valid = this.password.length >= 8;
-              this.passwordCriteria[1].valid = /[A-Z]/.test(this.password);
-              this.passwordCriteria[2].valid = /[a-z]/.test(this.password);
-              this.passwordCriteria[3].valid = /\d/.test(this.password);
-              this.passwordCriteria[4].valid = /[\W_]/.test(this.password);
+  document.addEventListener('DOMContentLoaded', function() {
+    var passwordInput = document.getElementById('password');
+    var submitBtn = document.getElementById('submitBtn');
+  var passwordCriteria = {
+    length: false,
+    upperCase: false,
+    lowerCase: false,
+    specialChar: false,
+  };
 
+  
+  passwordInput.addEventListener('input', function() {
+    var password = passwordInput.value;
+    passwordCriteria.length = password.length >= 8;
+    passwordCriteria.upperCase = /[A-Z]/.test(password);
+    passwordCriteria.lowerCase = /[a-z]/.test(password);
+    passwordCriteria.specialChar = /[\W_]/.test(password);
+    
+  
+    // Aktualisierung der Kriterienanzeige
+    document.getElementById('criteriaLength').classList.toggle('text-success', passwordCriteria.length);
+    document.getElementById('criteriaUpper').classList.toggle('text-success', passwordCriteria.upperCase);
+    document.getElementById('criteriaLower').classList.toggle('text-success', passwordCriteria.lowerCase);
+    document.getElementById('criteriaSpecial').classList.toggle('text-success', passwordCriteria.specialChar);
+  
+    // Aktivieren/Deaktivieren des Submit-Buttons
+    var canRegister = Object.values(passwordCriteria).every(c => c);
+    submitBtn.disabled = !canRegister;
+  });
+  var form = document.getElementById('signupForm');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
 
-              this.canRegister = this.passwordCriteria.every(c => c.valid);
-          },
-          register: function() {
-            if (this.canRegister) {
-              // Überprüfen Sie hier zusätzlich, ob die anderen Formularfelder korrekt ausgefüllt sind
-              // und ob das bestätigte Passwort mit dem Passwort übereinstimmt
-              // Wenn ja, führen Sie die Registrierungslogik aus
-              alert("Registriert!");
-          } else {
-              // Fehlermeldung anzeigen, wenn die Passwortkriterien nicht erfüllt sind
-              alert("Bitte überprüfen Sie Ihre Eingaben!");
-          }
-          }
-      }
-  }).mount("#app")
+    if (Object.values(passwordCriteria).every(c => c)) {
+      var formData = new FormData(this);
+      fetch('/signup', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if(response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Serverantwort war nicht OK.');
+        }
+      })
+      .then(data => {
+        console.log('Erfolg:', data);
+          window.location.href = '/';
+      })
+      .catch(error => {
+        console.error('Fehler beim Senden des Formulars:', error);
+      });
+    } else {
+      alert('Bitte überprüfen Sie Ihre Eingaben');
+    }
+  });
+});
 </script>
