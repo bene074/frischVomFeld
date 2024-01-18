@@ -39,13 +39,11 @@
         body: formData
       })
       .then(response => {
-        if (!response.ok) {
+        console.log(response)
           if (response.status === 403) {
             alert('Falsche E-Mail/Passwort-Kombination.');
-          } 
-        } else {
-          window.location.href = '/'; // Weiterleitung nach erfolgreichem Login
-        }
+          }
+          window.location.href = '/';
       })
       .catch(error => {
         console.error('Fehler:', error);

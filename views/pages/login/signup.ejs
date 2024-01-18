@@ -66,21 +66,21 @@
     specialChar: false,
   };
 
-  
+
   passwordInput.addEventListener('input', function() {
     var password = passwordInput.value;
     passwordCriteria.length = password.length >= 8;
     passwordCriteria.upperCase = /[A-Z]/.test(password);
     passwordCriteria.lowerCase = /[a-z]/.test(password);
     passwordCriteria.specialChar = /[\W_]/.test(password);
-    
-  
+
+
     // Aktualisierung der Kriterienanzeige
     document.getElementById('criteriaLength').classList.toggle('text-success', passwordCriteria.length);
     document.getElementById('criteriaUpper').classList.toggle('text-success', passwordCriteria.upperCase);
     document.getElementById('criteriaLower').classList.toggle('text-success', passwordCriteria.lowerCase);
     document.getElementById('criteriaSpecial').classList.toggle('text-success', passwordCriteria.specialChar);
-  
+
     // Aktivieren/Deaktivieren des Submit-Buttons
     var canRegister = Object.values(passwordCriteria).every(c => c);
     submitBtn.disabled = !canRegister;
@@ -91,20 +91,16 @@
 
     if (Object.values(passwordCriteria).every(c => c)) {
       var formData = new FormData(this);
+      console.log(formData.toString())
       fetch('/signup', {
         method: 'POST',
         body: formData
       })
       .then(response => {
-        if(response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Serverantwort war nicht OK.');
-        }
-      })
-      .then(data => {
-        console.log('Erfolg:', data);
+        if(response.status === 200){
+          console.log('Erfolg:');
           window.location.href = '/';
+        }
       })
       .catch(error => {
         console.error('Fehler beim Senden des Formulars:', error);
