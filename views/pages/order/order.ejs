@@ -1,19 +1,19 @@
-<!-- views/pages/orders.ejs -->
 <div class="container mt-4">
-    <h2 class="mb-3">Meine Bestellungen</h2>
+    <h2 class="mb-3">Warenkorb</h2>
 
-    <% if (userOrders.length > 0) { %>
+    <% if (groupedBasket.length > 0) { %>
         <ul class="list-group mb-3">
-            <% userOrders.forEach(function(order) { %>
+            <% groupedBasket.forEach(function(item) { %>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
-                        <h5 class="my-0"><%= order.product.name %></h5>
-                        <small class="text-muted">Preis: <%= order.product.price %>€</small>
+                        <h5 class="my-0"><%= item.product.name %></h5>
+                        <small class="text-muted">Preis: <%= item.product.price %>€</small>
+                        <small class="text-muted">Anzahl: <%= item.quantity %></small>
                     </div>
                 </li>
             <% }); %>
         </ul>
     <% } else { %>
-        <p class="text-center">Keine Bestellungen vorhanden.</p>
+        <p class="text-center">Der Warenkorb ist leer.</p>
     <% } %>
 </div>

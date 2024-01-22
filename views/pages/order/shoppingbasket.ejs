@@ -25,10 +25,19 @@
 
     </div>
 
-    <p class="text-center" v-if="orderPlaced">Ware bestellt</p>
-
-
-
+    <!-- Custom Modal -->
+    <div class="modal" v-if="showModal" v-cloak>
+        <div class="modal-content">
+            <span class="close-btn" @click="showModal = false">&times;</span>
+            <h3>Adresse auswählen/hinzufügen</h3>
+            <p>Wählen sie die gewünschte Adresse aus oder fügen sie eine neue hinzu</p>
+            <a class="btn gray-button button-spacing" disabled>Adresse hinzufügen(INAKTIV)</a>
+            <h3>Zahlungsdaten auswählen/hinzufügen</h3>
+            <p>Wählen sie die Zahlungsdaten aus oder fügen sie eine neue hinzu</p>
+            <a class="btn gray-button button-spacing" disabled>Zahlungsdaten hinzufügen(INAKTIV)</a>
+            <a class="btn green-button button-spacing mt-4" @click="finishOrder"> Bestellung kostenpflichtig abschließen</a>
+        </div>
+    </div>
 </div>
 
 <script src="https://unpkg.com/vue@next"></script>
@@ -38,7 +47,8 @@
     data() {
       return {
         basket: <%- JSON.stringify(initialBasket) %>,
-        orderPlaced: false
+        orderPlaced: false,
+        showModal: false
       };
     },
     methods: {
@@ -57,8 +67,15 @@
           .catch(error => console.error('Error:', error));
       },
       placeOrder() {
+        console.log(this.showModal)
+        this.showModal = true;
+
+      },
+      finishOrder(){
+        this.showModal = false;
         fetch('/shoppingbasket/order', { method: 'POST' })
           .then(() => {
+            alert('Ware erfolgreich bestellt.');
             this.basket = [];
             this.orderPlaced = true;
           })
@@ -71,3 +88,40 @@
     }
   }).mount('#app');
 </script>
+
+<style>
+  .modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  .close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close-btn:hover,
+  .close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+</style>

@@ -85,7 +85,9 @@ So, while this \`isSuperAdmin\` demarcation might not be the right approach fore
     isVendor: {
       type: 'boolean',
       description: "Whether user is a vendor and has extra rights to add Products"
-    }
+    },
+
+
   },
 
 };

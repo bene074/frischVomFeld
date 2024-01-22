@@ -63,7 +63,11 @@ and exposed as \`req.me\`.)`
 
     description: `The provided email and password combination does not
      match any user in the database.`,
-    responseType: 'forbidden'
+    responseType: 'forbidden',
+    viewTemplatePath: 'pages/login', // Pfad zu Ihrer Login-Seite oder einer benutzerdefinierten Fehlerseite
+    locals: {
+      error: 'Invalid email/password combination.' // Fügen Sie eine Fehlermeldung hinzu, die auf der Seite angezeigt werden soll
+    }
 
       // ^This uses the custom `unauthorized` response located in `api/responses/unauthorized.js`.
       // To customize the generic "unauthorized" response across this entire app, change that file
@@ -76,6 +80,7 @@ and exposed as \`req.me\`.)`
 
   },
 
+  
   fn: async function ({emailAddress, password, rememberMe}) {
     sails.log.info(rememberMe)
 

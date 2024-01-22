@@ -109,6 +109,7 @@ the account verification message.)`,
     .intercept({name: 'UsageError'}, 'invalid')
     .fetch();
 
+   
 
     // Store the user's new id in their session.
     this.req.session.userId = newUserRecord.id;
@@ -119,5 +120,4 @@ the account verification message.)`,
       throw {redirect: '/'};
     }
   }
-
 };

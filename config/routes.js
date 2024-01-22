@@ -24,6 +24,10 @@ module.exports.routes = {
   'GET /login':                          { action: 'login/view-login' },
   'GET /signup':                         { action: 'login/view-signup' },
 
+  'GET /imprint':                         { view: 'pages/legal/imprint' },
+  'GET /dataprotection':                  { view: 'pages/legal/dataprotection' },
+  'GET /contact':                         { view: 'pages/legal/contact' },
+
   'GET /logout':                         { action: 'account/logout' },
   'POST  /login':                        { action: 'login/login' },
   'POST  /signup':                       { action: 'login/signup' },
@@ -53,17 +57,12 @@ module.exports.routes = {
   'GET /category/:id/destroy': { controller: 'CategoryController', action: 'destroyOne' },
 
   'GET /admin': { view: 'pages/admin/index' },
-  'GET /evaluation': { view: 'pages/evaluation/index' },
-  'GET /feedback': { view: 'pages/feedback/index' },
 
   'GET /usermanagement': { controller: 'UsermanagementController', action: 'find' },
   'GET /usermanagement/:id/destroy': { controller: 'UsermanagementController', action: 'destroyOne' },
 
   'GET /order': 'OrderController.findUserOrders',
 
-
-
-  '/helloworld': { view: 'pages/vue/helloworld' },
 
 
   'GET /shoppingbasket': 'ShoppingBasketController.show',
