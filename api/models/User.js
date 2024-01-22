@@ -86,28 +86,6 @@ So, while this \`isSuperAdmin\` demarcation might not be the right approach fore
       type: 'boolean',
       description: "Whether user is a vendor and has extra rights to add Products"
     },
-    street: {
-      type: 'string',
-      description: 'The street address of the user.',
-      maxLength: 200,
-      example: '123 Maple Street'
-    },
-
-    // New attribute for zipcode
-    zipcode: {
-      type: 'string',
-      description: 'The postal code of the user.',
-      maxLength: 20,
-      example: '12345'
-    },
-
-    // New attribute for city
-    city: {
-      type: 'string',
-      description: 'The city of the user.',
-      maxLength: 100,
-      example: 'Berlin'
-    },
 
 
   },

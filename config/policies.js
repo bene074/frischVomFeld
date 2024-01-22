@@ -39,7 +39,7 @@ module.exports.policies = {
   },
 
   ShoppingBasketController: {
-    '*': true // This allows public access to all actions in the Shopping Basket Controller
+    '*': 'is-logged-in' // This allows public access to all actions in the Shopping Basket Controller
   },
 
   ReviewController:{
