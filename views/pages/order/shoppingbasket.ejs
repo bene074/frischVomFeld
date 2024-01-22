@@ -13,7 +13,11 @@
                 <button class="btn btn-danger btn-sm" @click="removeItem(index)">Entfernen</button>
             </span>
         </li>
+        <div class="total-price">
+            <strong>Gesamtpreis: {{ totalPrice.toFixed(2) }}€</strong>
+        </div>
     </ul>
+
     <p class="text-center" v-if="basket.length === 0">Der Warenkorb ist leider leer.</p>
 
     <div class="buttons">
@@ -31,11 +35,11 @@
             <span class="close-btn" @click="showModal = false">&times;</span>
             <h3>Adresse auswählen/hinzufügen</h3>
             <p>Wählen sie die gewünschte Adresse aus oder fügen sie eine neue hinzu</p>
-            <a class="btn gray-button button-spacing" disabled>Adresse hinzufügen(INAKTIV)</a>
+            <a class="btn gray-button button-spacing" disabled>Adresse hinzufügen (INAKTIV)</a>
             <h3>Zahlungsdaten auswählen/hinzufügen</h3>
             <p>Wählen sie die Zahlungsdaten aus oder fügen sie eine neue hinzu</p>
-            <a class="btn gray-button button-spacing" disabled>Zahlungsdaten hinzufügen(INAKTIV)</a>
-            <a class="btn green-button button-spacing mt-4" @click="finishOrder"> Bestellung kostenpflichtig abschließen</a>
+            <a class="btn gray-button button-spacing" disabled>Zahlungsdaten hinzufügen (INAKTIV)</a>
+            <a class="btn green-button button-spacing mt-4" @click="finishOrder"> Bestellung kostenpflichtig für abschließen</a>
         </div>
     </div>
 </div>
@@ -50,6 +54,11 @@
         orderPlaced: false,
         showModal: false
       };
+    },
+    computed: {
+      totalPrice() {
+        return this.basket.reduce((sum, item) => sum + item.price, 0);
+      }
     },
     methods: {
       removeItem(index) {

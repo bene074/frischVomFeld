@@ -42,6 +42,7 @@
         console.log(response)
           if (response.status === 403) {
             alert('Falsche E-Mail/Passwort-Kombination.');
+            return;
           }
           window.location.href = '/';
       })

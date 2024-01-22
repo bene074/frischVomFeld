@@ -20,10 +20,10 @@ module.exports = {
     params.availability = (params.availability === 'on');
     params.user = req.me.id
     let categories = await Category.find();
-    await Product.create(params);
+    let newProduct = await Product.create(params).fetch();
     let products = await Product.find();
     sails.log.debug(products)
-    res.view ('pages/product/index', { products: products, categories: categories,  selectedCategoryId: 'all' } );
+    return res.redirect(`/product/${newProduct.id}/uploadImageForm`);
   },
 
   find: async function (req, res) {
