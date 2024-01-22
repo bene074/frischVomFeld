@@ -23,6 +23,6 @@ module.exports = async function (req, res, proceed) {
   // Otherwise, this request did not come from a logged-in user.
   sails.log.debug("forbidden cus")
 
-  return res.forbidden('You are not permitted to perform this action.');
+  return res.redirect('/');
 
 };

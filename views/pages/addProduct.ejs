@@ -3,22 +3,26 @@
         <!-- Name -->
         <div class="form-group">
             <label class="col-form-label-lg">Name</label>
-            <input type="text" class="form-control" maxlength="100" name="name">
+            <input type="text" class="form-control" maxlength="100" name="name" id="productName">
+            <span class="error-message" id="nameError"></span>
         </div>
 
         <!-- Price -->
         <div>
             <div class="form-group">
                 <label class="col-form-label-lg">Preis</label>
-                <input type="number" class="form-control" step="0.01" min="0" max="99999999.99" name="price">
+                <input type="number" class="form-control" step="0.01" min="0" max="99999999.99" name="price" id="productPrice">
+                <span class="error-message" id="priceError"></span>
             </div>
 
             <div class="form-group">
                 <label class="col-form-label-lg">Preisart</label>
-                <select class="form-control" name="priceType">
+                <select class="form-control" name="priceType" id="priceType">
+                    <option value="">Bitte wählen</option>
                     <option value="unit">Pro Einheit</option>
                     <option value="weight">Pro Gewicht</option>
                 </select>
+                <span class="error-message" id="priceTypeError"></span>
             </div>
         </div>
 
@@ -29,7 +33,6 @@
             <textarea class="form-control" maxlength="255" name="description" rows="4"></textarea>
         </div>
 
-
         <!-- Availability Checkbox -->
         <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="availability" name="availability">
@@ -37,13 +40,75 @@
         </div>
         <div class="form-group">
             <label class="col-form-label-lg">Kategorie</label>
-            <select class="form-control" name="category">
+            <select class="form-control" name="category" id="productCategory">
+                <option value="">Bitte wählen</option>
                 <% categories.forEach(function(category){ %>
                     <option value="<%= category.id %>"><%= category.name %></option>
                 <% }); %>
             </select>
+            <span class="error-message" id="categoryError"></span>
         </div>
-        <button type="submit" class="green-add-button margin-bottom-add-button add-button">Hinzufügen</button>
+        <button type="submit" class="green-add-button margin-bottom-add-button add-button" id="submitButton" disabled>Hinzufügen</button>
 
     </form>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var productName = document.getElementById('productName');
+    var productPrice = document.getElementById('productPrice');
+    var priceType = document.getElementById('priceType');
+    var productCategory = document.getElementById('productCategory');
+    var submitButton = document.getElementById('submitButton');
+
+    var nameError = document.getElementById('nameError');
+    var priceError = document.getElementById('priceError');
+    var priceTypeError = document.getElementById('priceTypeError');
+    var categoryError = document.getElementById('categoryError');
+
+    function validateField(field, errorMessageElement, message) {
+      if (!field.value) {
+        field.classList.add('error-highlight');
+        errorMessageElement.textContent = message;
+        return false;
+      } else {
+        field.classList.remove('error-highlight');
+        errorMessageElement.textContent = '';
+        return true;
+      }
+    }
+
+    function updateButtonState() {
+      var isNameValid = validateField(productName, nameError, 'Bitte geben Sie einen Namen ein.');
+      var isPriceValid = validateField(productPrice, priceError, 'Bitte geben Sie einen Preis ein.');
+      var isPriceTypeValid = validateField(priceType, priceTypeError, 'Bitte wählen Sie eine Preisart.');
+      var isCategoryValid = validateField(productCategory, categoryError, 'Bitte wählen Sie eine Kategorie.');
+
+      submitButton.disabled = !(isNameValid && isPriceValid && isPriceTypeValid && isCategoryValid);
+    }
+
+    // Initial validation check
+    updateButtonState();
+
+    // Event listeners
+    productName.addEventListener('input', updateButtonState);
+    productPrice.addEventListener('input', updateButtonState);
+    priceType.addEventListener('change', updateButtonState);
+    productCategory.addEventListener('change', updateButtonState);
+  });
+</script>
+
+
+<style>
+  .error-highlight {
+    border-color: red;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 5px;
+  }
+
+</style>
+

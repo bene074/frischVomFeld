@@ -56,7 +56,7 @@ module.exports.routes = {
   'POST /category': { controller: 'CategoryController', action:'create' },
   'GET /category/:id/destroy': { controller: 'CategoryController', action: 'destroyOne' },
 
-  'GET /admin': { view: 'pages/admin/index' },
+  'GET /admin': 'AdminController.fn',
 
   'GET /usermanagement': { controller: 'UsermanagementController', action: 'find' },
   'GET /usermanagement/:id/destroy': { controller: 'UsermanagementController', action: 'destroyOne' },

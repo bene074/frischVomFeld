@@ -16,13 +16,13 @@ module.exports = async function (req, res, proceed) {
   // > For more about where `req.me` comes from, check out this app's
   // > custom hook (`api/hooks/custom/index.js`).
   if (!req.me) {
-       return res.forbidden('You are not permitted to perform this action.');
+    return res.redirect('/');
   }//•
 
   // Then check that this user is a "vendor".
   if (!req.me.isVendor) {
 
-    return res.forbidden();
+    return res.redirect('/');
   }//•
 
   // IWMIH, we've got ourselves a "vendor".

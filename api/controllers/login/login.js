@@ -80,7 +80,7 @@ and exposed as \`req.me\`.)`
 
   },
 
-  
+
   fn: async function ({emailAddress, password, rememberMe}) {
     sails.log.info(rememberMe)
 
@@ -135,7 +135,7 @@ and exposed as \`req.me\`.)`
       throw {redirect: '/'};
     }
 
-    sails.debug(req.me)
+    sails.debug(this.req.me)
 
   }
 
