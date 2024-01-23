@@ -99,64 +99,71 @@ Mit "FrischVomFeld" wird eine Brücke zwischen lokalen Lebensmittelproduzenten u
 #### Use-Cases:
 
 - **Produktlisting erstellen**
-  - **Beschreibung:** Der Verkäufer kann auf der Plattform ein neues Produktlisting erstellen, um seine
-    Waren anzubieten. Er gibt alle notwendigen Informationen wie Produktname, Beschreibung, Preis
-    und Verfügbarkeit an, und lädt Bilder des Produktes hoch, um den Kunden eine visuelle Vorstellung
-    des Produktes zu bieten
+  - **Beschreibung:** Der Verkäufer hat die Möglichkeit, auf der Plattform ein neues Produktlisting zu erstellen,
+   um seine Waren anzubieten. Dabei gibt er alle erforderlichen Informationen wie Produktname, Beschreibung, Preis
+    und Verfügbarkeit an. Zusätzlich lädt er Bilder des Produkts hoch, um den Kunden eine visuelle Vorstellung des
+     angebotenen Artikels zu vermitteln.
   - **Akteur:** Verkäufer
   - **Auslösendes Ereignis:** Klick auf "neues Produkt".
+  - **Skripte:** pages/addProduct.ejs & api/controllers/ProductController.js
 
 - **Produktinformationen aktualisieren**
-  - **Beschreibung:** Wenn sich Details zu einem Produkt ändern, kann der Verkäufer die
-    Produktinformationen auf der Plattform aktualisieren. Dies umfasst Änderungen an der
-    Produktbeschreibung, dem Preis, der Verfügbarkeit oder den Produktbildern, um sicherzustellen,
-    dass die Kunden stets aktuelle und korrekte Informationen erhalten.
+  - **Beschreibung:** Der Verkäufer hat die Möglichkeit, bei Änderungen an den Details eines Produkts die entsprechenden
+   Produktinformationen auf der Plattform zu aktualisieren. Dies beinhaltet Anpassungen an der Produktbeschreibung, dem 
+   Preis, der Verfügbarkeit oder den Produktbildern. Dadurch wird sichergestellt, dass die Kunden stets mit aktuellen
+   und korrekten Informationen versorgt werden.
   - **Akteur:** Verkäufer
   - **Auslösendes Ereignis:** Klick auf "ändern" in Produktübersicht.
+  - **Skripte:** pages/product/edit.ejs & api/controllers/ProductController.js
 
 - **Produktlisting löschen**
-  - **Beschreibung:** Der Verkäufer kann ein Produktlisting entfernen, wenn das Produkt nicht mehr
-    verfügbar ist oder aus anderen Gründen nicht mehr auf der Plattform gelistet werden soll. Dies hilft,
-    die Plattform aktuell und übersichtlich zu halten und vermeidet mögliche Verwirrung oder Frustration
-    bei den Kunden.
+  - **Beschreibung:** Der Verkäufer hat die Befugnis, ein Produktlisting zu entfernen, wenn das Produkt nicht mehr verfügbar
+   ist oder aus anderen Gründen nicht mehr auf der Plattform gelistet werden soll. Diese Maßnahme trägt dazu bei, die 
+   Plattform aktuell und übersichtlich zu halten. Zudem verhindert sie mögliche Verwirrung oder Frustration bei den Kunden.
   - **Akteur:** Verkäufer
   - **Auslösendes Ereignis:** Klick auf "löschen" in Produktübersicht.
+  - **Skripte:** pages/product/edit.ejs & api/controllers/ProductController.js
 
 - **Bestellung aufgeben**
-  - **Beschreibung:** Der Kunde kann durch die Produktlistings browsen, Produkte in den Warenkorb
-    legen und die Bestellung abschließen. Dabei werden ihm die ausgewählten Produkte und der
-    Gesamtpreis, um ihm eine informierte Kaufentscheidung zu ermöglichen.
+  - **Beschreibung:** Der Kunde hat die Möglichkeit, durch die verschiedenen Produktlistings zu stöbern, Produkte in den 
+  Warenkorb zu legen und letztendlich die Bestellung abzuschließen. Dabei werden ihm die ausgewählten Produkte sowie 
+  der Gesamtpreis angezeigt, um ihm eine informierte Kaufentscheidung zu ermöglichen.
   - **Akteur:** Kunde
   - **Auslösendes Ereignis:** Klick auf "Bestellen" im Warenkorb.
+  - **Skripte:** pages/order/shoppingbasket.ejs & api/controllers/ShoppingBasketController.js
 
 - **Bewertung abgeben**
-  - **Beschreibung:** Nach dem Erhalt und Testen der Produkte kann der Kunde auf der Plattform eine
-    Bewertung abgeben. Er kann Kommentare schreiben, um seine Erfahrungen mit
-    dem Produkt und dem Verkäufer zu teilen und anderen Kunden bei ihrer Kaufentscheidung zu helfen.
+  - **Beschreibung:** Nach dem Erhalt und Testen der Produkte hat der Kunde die Möglichkeit, auf der Plattform eine Bewertung
+   abzugeben. Dabei kann er Kommentare schreiben, um seine Erfahrungen mit dem Produkt und dem Verkäufer zu teilen. Dies trägt
+   dazu bei, anderen Kunden bei ihrer Kaufentscheidung zu helfen.
   - **Akteur:** Kunde
-  - **Auslösendes Ereignis:** Ausfüllen des textareas und Klick auf "bewerten" Button clicken.
+  - **Auslösendes Ereignis:** Ausfüllen des textareas und Klick auf "bewerten" Button klicken.
+  - **Skripte:** pages/product/show.ejs & api/controllers/ReviewController.js
 
 - **Admin-Dashboard**
-  - **Beschreibung:** Der Admin hat Zugang zu einem Dashboard, von dem aus er die Plattform
-    verwalten kann. Er kann Benutzer und Kategorien überprüfen, Feedback von Kunden lesen und
-    ggf. Verkäufer und Käufer löschen, um die Qualität und Sicherheit der Plattform zu gewährleisten.
+  - **Beschreibung:** Der Administrator verfügt über ein Dashboard, über das er die Plattform verwalten kann. Dabei hat er die 
+  Möglichkeit, Benutzer und Kategorien zu überprüfen, Feedback von Kunden zu lesen und gegebenenfalls Verkäufer sowie Käufer zu 
+  entfernen, um die Qualität und Sicherheit der Plattform zu gewährleisten.
   - **Akteur:** Admin
   - **Auslösendes Ereignis:** Click auf "Admin" Button im header.
+  - **Skripte:** pages/admin/index.ejs & api/controllers/UsermanagementController & api/controllers/CategoryController.js
 
 - **Benutzerregistrierung**
-  - **Beschreibung:** Ein Besucher kann sich auf der Plattform registrieren, um als Kunde oder
-    Verkäufer aufzutreten. Durch die Eingabe notwendiger Informationen wie Name, E-Mail-Adresse und
-    Passwort, sowie die Auswahl der Rolle (Kunde oder Verkäufer) wird ein neues Benutzerkonto erstellt.
+  - **Beschreibung:** Ein Nutzer kann sich auf der Plattform anmelden, um entweder als Kunde oder Verkäufer aktiv zu werden. 
+  Hierzu gibt der Nutzer die erforderlichen Informationen, wie seinen Namen, seine E-Mail-Adresse und ein Passwort an. 
+  Zusätzlich wählt er die entsprechende Rolle (Kunde oder Verkäufer) aus, und somit wird ein neues Benutzerkonto erstellt.
   - **Akteur:** Besucher
   - **Auslösendes Ereignis:** Klick auf "Registrieren".
+  - **Skripte:** pages/login/signup.ejs & pages/login/login.ejs & api/controllers/UserController.js
 
 - **Produktinformationen suchen**
-  - **Beschreibung:** Der Kunde kann auf der Plattform nach bestimmten Produkten suchen oder durch
-    Kategorien browsen, um Produkte zu finden, die seinen Interessen entsprechen. Durch eine Suchoption und Kategoriefilter
-    kann er die angezeigten Produkte eingrenzen. Auf den Produktseiten erhält der Kunde Informationen zu den Produkten,
-    einschließlich Bilder, Preis und Kundenbewertungen.
+  - **Beschreibung:** Der Kunde hat die Möglichkeit, auf der Plattform gezielt nach bestimmten Produkten zu suchen oder durch 
+  verschiedene Kategorien zu stöbern, um Produkte zu entdecken, die seinen Interessen entsprechen. Dank einer Suchfunktion und 
+  Kategorienfilter kann er die angezeigten Produkte präzise eingrenzen. Auf den Produktseiten findet der Kunde detaillierte 
+  Informationen zu den jeweiligen Produkten, darunter Bilder, Preise und Kundenbewertungen.
   - **Akteur:** Kunde, Besucher
   - **Auslösendes Ereignis:** Such- und Filtervorgang von Produkten.
+  - **Skripte:** pages/product/index.ejs & api/controllers/ProductController.js
 
 ## Design
 
@@ -184,6 +191,8 @@ Mit "FrischVomFeld" wird eine Brücke zwischen lokalen Lebensmittelproduzenten u
 ## Optimierung
 
 ### 4.1. SEO
+Die SEO Suchbegriffe die wir ausgesucht haben, waren hauptsächlich Wörter die wir auf unserer Hompage in Texten stehen haben oder sehr ähnlich zu den Texten auf der Hompage sind.
+Daher gab es bezüglich den Suchbegriffen nichts zum optimieren:
 
 - regionales bio fleisch
 - fleisch online kaufen
@@ -193,6 +202,11 @@ Mit "FrischVomFeld" wird eine Brücke zwischen lokalen Lebensmittelproduzenten u
 - lieferservice
 
 ### Performance
+Nach dem ersten Performance Test mit Lighthouse hatten wir folgendes Ergebnis:
+![Performance](assets/images/readme/performance_old.png)
 
+Nach dem der erste Performance Test nicht so gut ausfiehl, haben wir unser Banner auf der Startseite kompriniert und den Code so angepasst, dass ab einer bestimmten Bildschirmgröße immer ein neues, an das Format angepasste Bild genommen wird und nicht das Bild auf jede größe zugeschnitten wird.
 ![Performance](assets/images/readme/performance.png)
+
+Dieses Ergebnis ist nun nicht deutlich besser, aber besser als das alte.
 
