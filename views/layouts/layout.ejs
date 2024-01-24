@@ -73,7 +73,7 @@
 
             </div>
             <div class="navbar-brand mx-auto mx-md-0 d-flex align-items-center">
-                <img class="fixed-logo" alt="frischVomFeld logo" src="../images/FvFLogo-removebg.png" onclick="window.location.href='/'"/>
+                <img class="fixed-logo" alt="frischVomFeld logo" src="../images/FvFLogo-removebg.webp" onclick="window.location.href='/'"/>
                 <!-- Anmelden Button -->
                 <% if (!req.me) { %>
                     <a class="btn btn-outline-info ml-2 ma" href="/login">Anmelden</a>
@@ -103,6 +103,14 @@
                         <a class="btn btn-outline-info ml-2 d-none d-md-block" href="/logout">Abmelden</a>
                     </div>
                 <%}%>
+            </div>
+
+            <!-- Neuer Container für die Suchleiste -->
+            <div class="search-container d-md-none">
+                <form action="/product" method="get" class="form-inline">
+                    <input type="hidden" name="categoryId" id="hiddenCategoryId">
+                    <input class="form-control" type="search" placeholder="Suchen" aria-label="Search" name="q">
+                </form>
             </div>
 
 

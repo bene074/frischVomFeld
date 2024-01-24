@@ -14,9 +14,9 @@
     </div>
     <div class="button-row">
         <% if(!req.me) { %>
-            <a class="btn btn-primary cto-buttons-bottom" href="/login">Jetzt bestellen</a>
+            <a class="btn btn-primary cto-buttons-bottom" href="/product">Jetzt umsehen</a>
         <% } else if(!req.me.isVendor) { %>
-            <a class="btn btn-primary cto-buttons-bottom" href="/product">Jetzt bestellen</a>
+            <a class="btn btn-primary cto-buttons-bottom" href="/product">zur Produktübersicht</a>
         <% } %>
 
     </div>

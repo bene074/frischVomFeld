@@ -3,3 +3,18 @@ footer{
 }
 
 
+@media (max-width: 767px) {
+  .search-container {
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .search-container .form-inline {
+    justify-content: center;
+    display: flex;
+  }
+
+  .search-container .form-control {
+    width: auto; /* Passen Sie die Breite nach Bedarf an */
+  }
+}
