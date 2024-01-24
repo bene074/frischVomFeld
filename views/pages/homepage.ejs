@@ -1,141 +1,43 @@
 <div id="homepage">
             <!-- Code nach dem Performance Test-->
     <div>
-        <img 
-            srcset="/images/fvfBanner_320.png 320w,
-                    /images/fvfBanner_640.png 640w,
-                    /images/fvfBanner_1024.png 1024w"
+        <img
+            srcset="/images/fvfBanner_320.webp 320w,
+                    /images/fvfBanner_640.webp 640w,
+                    /images/fvfBanner_1024.webp 1024w"
             sizes="(max-width: 320px) 320px,
                    (max-width: 640px) 640px,
                    (max-width: 1024px) 1024px"
-            src="/images/fvfBanner_640.png"
-            alt="fvfBanner"
+            src="/images/fvfBanner_640.webp"
+            alt="Idyllische ländliche Landschaft mit einem Korb voller Äpfel und Brot im Vordergrund, goldenen Weizenfeldern und Bauernhäusern inmitten üppiger Grünflächen unter einem sanften, warmen Himmel."
             class="responsive-image"/>
-    </div> 
-    <!-- Code vor dem ersten Performance test-->
-  <!--  <div >
-        <img class="responsive-image" alt="fvfBanner" src="/images/fvfBanner.png"/>
-    </div> -->
+    </div>
     <div class="button-row">
         <% if(!req.me) { %>
-            <!-- Wenn kein Nutzer angemeldet ist, führt der Button zur Login-Seite -->
             <a class="btn btn-primary cto-buttons-bottom" href="/login">Jetzt bestellen</a>
         <% } else if(!req.me.isVendor) { %>
-            <!-- Wenn ein normaler Nutzer angemeldet ist, führt der Button zur Produktseite -->
             <a class="btn btn-primary cto-buttons-bottom" href="/product">Jetzt bestellen</a>
         <% } %>
-        <!-- Kein Button wird angezeigt, wenn ein Vendor angemeldet ist -->
-    
+
     </div>
-    <!--<div class="text-below-banner">
-        Willkommen bei FrischVomFeld, Ihrer Online-Plattform für frische, lokal produzierte Lebensmittel direkt von den Erzeugern aus Ihrer Region. Entdecken Sie ein vielfältiges Angebot an frischen Produkten, von Obst und Gemüse bis hin zu Fleisch, Milchprodukten und handwerklichen Erzeugnissen. Unsere Mission ist es, eine direkte Verbindung zwischen lokalen Bauern, Lebensmittelproduzenten und Konsumenten herzustellen, um die lokale Wirtschaft zu fördern und Ihnen eine gesunde, nachhaltige und bequeme Einkaufsalternative zu bieten. Seien Sie Teil einer Bewegung, die sich für lokal produzierte Lebensmittel, nachhaltige Landwirtschaft und eine stärkere Verbindung zwischen Produzenten und Konsumenten einsetzt. Entdecken Sie die Vielfalt der lokalen Lebensmittelproduktion und genießen Sie die hochwertigen Produkte, die unsere Region zu bieten hat. Registrieren Sie sich jetzt, um den Geschmack von FrischVomFeld zu erleben!
-        Auf FrischVomFeld können Sie:
-        Die Frische und Qualität der lokalen Produkte genießen, die mit Leidenschaft und Sorgfalt hergestellt werden.
-        Die Geschichten und Menschen hinter den Produkten kennenlernen und die lokale Lebensmittelproduktion unterstützen.
-        Bequem von zu Hause aus bestellen und Ihre frischen Produkte direkt an Ihre Haustür geliefert bekommen.
-    </div> -->
+
     <div id="textToShow" class="clickable-text">
-        <!-- Gesamter Text -->
         <p>
-            Willkommen bei FrischVomFeld, Ihrer Online-Plattform für frische, lokal produzierte Lebensmittel direkt von den Erzeugern aus Ihrer Region. Entdecken Sie ein vielfältiges Angebot an frischen Produkten, von Obst und Gemüse bis hin zu Fleisch, Milchprodukten und handwerklichen Erzeugnissen. Unsere Mission ist es, eine direkte Verbindung zwischen lokalen Bauern, Lebensmittelproduzenten und Konsumenten herzustellen, um die lokale Wirtschaft zu fördern und Ihnen eine gesunde, nachhaltige und bequeme Einkaufsalternative zu bieten. Seien Sie Teil einer Bewegung, die sich für lokal produzierte Lebensmittel, nachhaltige Landwirtschaft und eine stärkere Verbindung zwischen Produzenten und Konsumenten einsetzt. Entdecken Sie die Vielfalt der lokalen Lebensmittelproduktion und genießen Sie die hochwertigen Produkte, die unsere Region zu bieten hat. Registrieren Sie sich jetzt, um den Geschmack von FrischVomFeld zu erleben!
-            Auf FrischVomFeld können Sie:
+            Willkommen bei FrischVomFeld, Ihrer Online-Plattform für frische, lokal produzierte Lebensmittel direkt von den Erzeugern aus Ihrer Region. Entdecken Sie ein vielfältiges Angebot an frischen Produkten, von Obst und Gemüse bis hin zu Fleisch, Milchprodukten und handwerklichen Erzeugnissen.
           <span id="additionalText" style="display: none;">
-            Die Frische und Qualität der lokalen Produkte genießen, die mit Leidenschaft und Sorgfalt hergestellt werden.
-            Die Geschichten und Menschen hinter den Produkten kennenlernen und die lokale Lebensmittelproduktion unterstützen.
-             Bequem von zu Hause aus bestellen und Ihre frischen Produkte direkt an Ihre Haustür geliefert bekommen.
+              Unsere Mission ist es, eine direkte Verbindung zwischen lokalen Bauern, Lebensmittelproduzenten und Konsumenten herzustellen, um die lokale Wirtschaft zu fördern und Ihnen eine gesunde, nachhaltige und bequeme Einkaufsalternative zu bieten.
+              Seien Sie Teil einer Bewegung, die sich für lokal produzierte Lebensmittel, nachhaltige Landwirtschaft und eine stärkere Verbindung zwischen Produzenten und Konsumenten einsetzt.
+              Entdecken Sie die Vielfalt der lokalen Lebensmittelproduktion und genießen Sie die hochwertigen Produkte, die unsere Region zu bieten hat.
+              Auf FrischVomFeld können Sie:
+              Die Frische und Qualität der lokalen Produkte genießen, die mit Leidenschaft und Sorgfalt hergestellt werden.
+              Die Geschichten und Menschen hinter den Produkten kennenlernen und die lokale Lebensmittelproduktion unterstützen.
+              Bequem von zu Hause aus bestellen und Ihre frischen Produkte direkt an Ihre Haustür geliefert bekommen.
+              Registrieren Sie sich jetzt, um den Geschmack von FrischVomFeld zu erleben!
+
           </span>
           <span id="toggleLink" class="toggle-link">Mehr anzeigen</span>
         </p>
       </div>
-      <div class="button-grid">
-        <% if(req.me) { %>
-        <div class="grid-item">
-            <a href="/product" class="btn gray-button button-spacing disabled">
-                <button class="btn gray-button button-spacing disabled">
-                    Obst<br>
-                    <span class="slogan">Jetzt bestellen (INAKTIV)</span>
-                </button>
-            </a>
-        </div>
-        <div class="grid-item">
-            <a href="/product" class="btn gray-button button-spacing disabled">
-                <button class="btn gray-button button-spacing disabled">
-                    Gemüse<br>
-                    <span class="slogan">Jetzt bestellen (INAKTIV)</span>
-                </button>
-            </a>
-        </div>
-        <div class="grid-item">
-            <a href="/product" class="btn gray-button button-spacing disabled">
-                <button class="btn gray-button button-spacing disabled">
-                    Milchprodukte<br>
-                    <span class="slogan">Jetzt bestellen (INAKTIV)</span>
-                </button>
-            </a>
-        </div>
-        <div class="grid-item">
-            <a href="/product" class="btn gray-button button-spacing disabled">
-                <button class="btn gray-button button-spacing disabled">
-                    Fleisch & Wurst<br>
-                    <span class="slogan">Jetzt bestellen (INAKTIV)</span>
-                </button>
-            </a>
-        </div>
-        <% } else { %>
-            <div class="grid-item">
-                <a href="/login" class="btn gray-button button-spacing disabled">
-                    <button class="btn gray-button button-spacing disabled">
-                        Obst<br>
-                        <span class="slogan">Jetzt bestellen (INAKTIV)</span>
-                    </button>
-                </a>
-            </div>
-            <div class="grid-item">
-                <a href="/login" class="btn gray-button button-spacing disabled">
-                    <button class="btn gray-button button-spacing disabled">
-                        Gemüse<br>
-                        <span class="slogan">Jetzt bestellen (INAKTIV)</span>
-                    </button>
-                </a>
-            </div>
-            <div class="grid-item">
-                <a href="/login" class="btn gray-button button-spacing disabled">
-                    <button class="btn gray-button button-spacing disabled">
-                        Milchprodukte<br>
-                        <span class="slogan">Jetzt bestellen (INAKTIV)</span>
-                    </button>
-                </a>
-            </div>
-            <div class="grid-item">
-                <a href="/login" class="btn gray-button button-spacing disabled">
-                    <button class="btn gray-button button-spacing disabled">
-                        Fleisch & Wurst<br>
-                        <span class="slogan">Jetzt bestellen (INAKTIV)</span>
-                    </button>
-                </a>
-            </div>
-        <% } %>
-    </div>
-    <div>
-        <h2 class="product-header">Beliebte Produkte</h2>
-    </div>
-    <div class="image-row">
-        <div class="image-container">
-            <img src="/images/img_potato.jpg" alt="Potato" class="custom-image">
-            <p class="image-description">Kartoffeln</p>
-            <div class="watermark">Inaktiv</div>
-        </div>
-        <div class="image-container">
-            <img src="/images/img_apple.jpg" alt="Apple" class="custom-image">
-            <p class="image-description">Äpfel</p>
-            <div class="watermark">Inaktiv</div>
-        </div>
-        <div class="image-container">
-            <img src="/images/img_meat.png" alt="Meat" class="custom-image">
-            <p class="image-description">Tomahawk</p>
-            <div class="watermark">Inaktiv</div>
-        </div>
-    </div>
     <div class="button-row">
         <% if(req.me) { %>
             <% if(req.me.isVendor) { %>
@@ -151,4 +53,29 @@
 
 </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
+
+<style>
+  #textToShow {
+    max-width: 600px; /* Anpassung für größere Bildschirme */
+    margin: 0 auto; /* Zentriert den Container */
+    padding: 0 10px; /* Fügt Padding hinzu, damit der Text nicht direkt am Rand ist */
+  }
+
+  .clickable-text p {
+    text-align: justify; /* Für einen gleichmäßigen Textfluss */
+  }
+
+  .toggle-link {
+    color: blue; /* Beispielfarbe für den Link */
+    cursor: pointer; /* Zeigt an, dass es sich um einen klickbaren Link handelt */
+    text-decoration: underline; /* Unterstreicht den Link */
+  }
+
+  @media (max-width: 768px) {
+    #textToShow {
+      max-width: 100%; /* Nimmt auf kleineren Bildschirmen die gesamte Breite ein */
+      padding: 0 20px; /* Größeres Padding für kleinere Bildschirme */
+    }
+  }
+</style>
 

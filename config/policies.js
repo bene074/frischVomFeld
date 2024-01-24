@@ -19,11 +19,8 @@ module.exports.policies = {
 
   '*': 'is-logged-in',
 
-  'admin/view-index': 'is-super-admin',
   'login/*': true,
   'account/logout': true,
-  '/':true,
-  'view-admin': 'is-super-admin',
 
   ProductController: {
     '*':  'is-vendor',
