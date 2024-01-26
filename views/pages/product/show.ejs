@@ -80,7 +80,7 @@
                         <p>Reviewed by: <%= review.user.firstName %></p>
                         <%if (review.user.id === req.me?.id) { %>
                             <form action="/review/delete/<%= review.id %>" method="POST">
-                                <button type="submit">Delete Review</button>
+                                <button type="submit">Review löschen</button>
                             </form>
                         <% } %>
                     </div>
@@ -89,7 +89,7 @@
                 <!-- Review Form -->
                 <% if(req.me) {%>
                 <form action="/review/create" method="POST">
-                    <textarea name="value" placeholder="Write your review here"></textarea>
+                    <textarea name="value" placeholder="Schreiben sie hier ihre Bewertung"></textarea>
                     <input type="hidden" name="productId" value="<%= product.id %>">
                     <button type="submit">bewerten</button>
                 </form>

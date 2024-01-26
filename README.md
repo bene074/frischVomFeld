@@ -143,7 +143,7 @@ Mit "FrischVomFeld" wird eine Brücke zwischen lokalen Lebensmittelproduzenten u
 
 - **Admin-Dashboard**
   - **Beschreibung:** Der Admin hat Zugang zu einem Dashboard, von dem aus er die Plattform
-    verwalten kann. Er kann Benutzer und Kategorien überprüfen, Feedback von Kunden lesen und
+    verwalten kann. Er kann Benutzer und Kategorien überprüfen und
     ggf. Verkäufer und Käufer löschen, um die Qualität und Sicherheit der Plattform zu gewährleisten.
   - **Akteur:** Admin
   - **Auslösendes Ereignis:** Click auf "Admin" Button im header.
@@ -155,6 +155,18 @@ Mit "FrischVomFeld" wird eine Brücke zwischen lokalen Lebensmittelproduzenten u
     Passwort, sowie die Auswahl der Rolle (Kunde oder Verkäufer) wird ein neues Benutzerkonto erstellt.
   - **Akteur:** Besucher
   - **Auslösendes Ereignis:** Klick auf "Registrieren".
+
+
+- **An-/Abmeldung**
+  - **Beschreibung:** User könne ihre Daten und Password ändern, falls sich ihre persönlichen Informationen geändert haben oder das Password ihnen unsicher scheint.
+  - **Akteur:** Admin, Verkäufer, Käufer
+  - **Auslösendes Ereignis:** Click auf User-Icon Button im header.
+
+
+- **Benutzerprofil bearbeiten**
+  - **Beschreibung:** User können sich Anmelden wenn sie nicht Angemeldet sind und Abmelden wenn sie angemeldet sind
+  - **Akteur:** Verkäufer, Käufer
+  - **Auslösendes Ereignis:** Click auf "Anmelden"/"Abmelden" Button im header.
 
 
 - **Produktinformationen suchen**
@@ -187,7 +199,59 @@ Mit "FrischVomFeld" wird eine Brücke zwischen lokalen Lebensmittelproduzenten u
 
 ## Implementierung
 
-### Produktlisting erstellen
+#### **Produktlisting erstellen**
+ - nur möglich wenn man als Verkäufer angemeldet ist
+ - click auf 'neues Produkt' Button in views/pages/product/index.ejs
+ - ruft views/pages/addProduct.ejs auf, dort kann man werte eintragen
+ - bei click auf 'Hinzufügen' wird der api/controllers/ProductController.js.create aufgerufen
+ - anschließend kann man auf der views/pages/product/uploadImageForm.ejs noch ein Bild hochladen
+ - click auf 'Hochladen' ruft api/controllers/ProductController.js.uploadImage auf
+
+#### **Produktinformationen aktualisieren**
+- nur möglich wenn man als Verkäufer angemeldet ist
+- click auf 'ändern' Button in views/pages/product/index.ejs
+- ruft views/pages/product/edit.ejs auf, dort kann man Werte ändern
+- bei click auf 'Hinzufügen' wird der api/controllers/ProductController.js.editOne aufgerufen
+- anschließend kann man auf der views/pages/product/uploadImageForm.ejs noch ein Bild hochladen
+- click auf 'Hochladen' ruft api/controllers/ProductController.js.uploadImage auf
+
+#### **Produktlisting löschen**
+- nur möglich wenn man als Verkäufer angemeldet ist
+- click auf 'löschen' Button in views/pages/product/index.ejs
+- ruft views/pages/product/edit.ejs auf, dort kann man Werte ändern
+- bei click auf 'Hinzufügen' wird der api/controllers/ProductController.js.destroyOne aufgerufen
+
+#### **Bestellung aufgeben**
+- nur möglich wenn man als Käufer angemeldet ist
+- click auf 'Zu Warenkorb hinzufügen', ruft api\controllers\ShoppingBasketController.js.put auf und leitet auf views/pages/order/shoppingbasket.ejs weiter
+- Option 1: Button 'Warenkorb leeren', api\controllers\ShoppingBasketController.js.clear
+- Option 2: Button 'Bestellen', ruft OrderModel in views/pages/order/shoppingbasket.ejs auf, click auf 'Bestellung kostenpflichtig für abschließen' ruft api\controllers\ShoppingBasketController.js.order auf
+- Option 3: Button click 'weiter Einkaufen' (oder 'Waren ansehen' wenn Warenkorb leer), leitet zu views/pages/product/index.ejs
+- Option 4: Button click 'getätigte Bestellungen', leitet zu views/pages/order/order.ejs und ruft api/controllers/OrderController.js und ruft api/controllers/OrderController.js.findUserOrders auf
+#### **Bewertung abgeben**
+- nur möglich wenn angemeldet
+- in views/pages/product/show.ejs in Textfeld reinschreiben und auf 'bewerten' button clicken
+- api/controllers/ReviewController.js.create wird aufgerufen und Review erstellt
+- bei eigenen Bewertungen button 'Review löschen' drücken, ruft api/controllers/ReviewController.js.delete auf
+#### **Admin-Dashboard**
+- views/pages/admin/index.ejs
+- Option 1: 'Kategorie hinzufügen', views/pages/category/add.ejs, Namen eintragen, 'Hinzufügen' drücken ruft api/controllers/CategoryController.js.create auf
+- Option 2: 'Kategorie bearbeiten', views/pages/category/index.ejs, 'neue Kategorie' -> Option 1, 'Löschen' ruft api/controllers/CategoryController.js.destroyOne auf
+- Option 3: 'Usermanagement', views/pages/account/usermanagement.ejs, 'Löschen' ruft api/controllers/UserController.js.delete auf
+#### **Benutzerregistrierung**
+- views/pages/login/signup.ejs, 'Account erstellen', ruft api/controllers/UserController.js.create auf
+#### **Produktinformationen suchen**
+- möglich auf jeder Seite, views/layouts/layout.ejs in Suchleiste suchen, ruft api/controllers/ProductController.js.find auf
+- in views/pages/product/index.ejs, Kategorie aus dropdown menü auswählen, ruft api/controllers/ProductController.js.find auf
+- kombinierbar
+- durch 'Suche löschen' wieder rücksetzbar
+#### **An-/Abmeldung**
+- click auf 'Anmelden' button im header, ruft views/pages/login/login.ejs auf
+- login Daten eingeben, 'Anmelden' drücken ruft api/controllers/login/login.js auf
+#### **Benutzerprofil bearbeiten**
+- click auf User-Icon in header, ruft views/pages/account/account-overview.ejs auf
+- Option 1: 'Profil bearbeiten', views/pages/account/edit-profile.ejs, Daten updaten 'Änderungen speichern' api/controllers/UserController.js.update
+- Option 2: 'Passwort ändern', views/pages/account/edit-password.ejs, Daten updaten 'Änderungen speichern' api/controllers/UserController.js.update
 
 ## Optimierung
 

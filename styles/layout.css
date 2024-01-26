@@ -5,16 +5,19 @@ footer{
 
 @media (max-width: 767px) {
   .search-container {
-    text-align: center;
-    padding: 10px 0;
+    margin-left: 25%;
+    width: 100%; /* Setzt die Breite des Containers auf die volle Breite */
+    display: flex; /* Ermöglicht die Verwendung von Flexbox */
+    justify-content: center; /* Zentriert den Inhalt horizontal */
+    padding: 10px 0; /* Fügt etwas Abstand oben und unten hinzu */
   }
 
   .search-container .form-inline {
-    justify-content: center;
-    display: flex;
+    flex-grow: 1; /* Lässt das Formular die volle Breite des Containers einnehmen */
   }
 
   .search-container .form-control {
-    width: auto; /* Passen Sie die Breite nach Bedarf an */
+    width: 90%; /* Passen Sie die Breite des Suchfelds an */
+    margin: 0 auto; /* Zentriert das Suchfeld im Formular */
   }
 }

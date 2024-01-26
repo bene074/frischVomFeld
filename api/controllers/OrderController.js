@@ -1,4 +1,3 @@
-// api/controllers/OrderController.js
 module.exports = {
   findUserOrders: async function(req, res) {
     if (!req.session.userId) {

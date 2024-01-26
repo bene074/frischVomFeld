@@ -6,7 +6,6 @@
  */
 
 module.exports = {
-  // Create a new user
   create: async function (req, res) {
     try {
       const isVendor = req.body.isVendor;
@@ -20,7 +19,6 @@ module.exports = {
     }
   },
 
-  // Read user information
   read: async function (req, res) {
     try {
       const users = await User.find();
@@ -30,7 +28,6 @@ module.exports = {
     }
   },
 
-  // Update a user's information
   update: async function (req, res) {
     try {
       const updatedUser = await User.updateOne({ userID: req.params.id })
@@ -45,17 +42,4 @@ module.exports = {
     }
   },
 
-  // Delete a user
-  delete: async function (req, res) {
-    try {
-      const deletedUser = await User.destroyOne({ userID: req.params.id });
-      if (deletedUser) {
-        return res.status(200).json(deletedUser);
-      } else {
-        return res.notFound();
-      }
-    } catch (err) {
-      return res.serverError(err);
-    }
-  }
 };
